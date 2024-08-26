@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:wght@400;700&display=swap" rel="stylesheet">
     <style>
-       
+        /* Style de base du corps de la page */
         body {
             margin: 0;
             padding: 0;
@@ -23,33 +23,33 @@
             scroll-behavior: smooth;
         }
       
-        /* menu coulissant */
+        /* Style du menu coulissant */
 
         .Menu {
             position: fixed;
             top: 10px;
-            right: 10px; /* Positionné hors de l'écran */
+            right: 10px;
             z-index: 3;
-         
         }
+
         #closeButton {
             position: fixed;
-            right: 270px; /* Ajustez la taille selon vos besoins */
+            right: 270px; /* Position du bouton de fermeture */
             top: 20px;
-            display: none; /* Cachez-le initialement */
+            display: none; /* Masqué par défaut */
         }
 
         .slide-menu {
             position: fixed;
             top: 0;
-            right: -350px; /* Positionné hors de l'écran */
+            right: -350px; /* Menu caché hors de l'écran */
             width: 250px;
             height: 100%;
             background-color: #333;
             color: #fff;
             box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
             z-index: 9999;
-            transform: skewX(-10deg); /* Applique un angle */
+            transform: skewX(-10deg); /* Applique un angle pour l'effet de glissement */
             transition: transform 0.4s ease, right 0.4s ease;
         }
 
@@ -69,12 +69,13 @@
             font-size: 1.2em;
         }
 
-        /* Classe pour montrer le menu */
+        /* Classe pour montrer le menu (le ramener à l'écran) */
         .show-menu {
             right: 0;
-            transform: skewX(0deg); /* Annule l'angle */
+            transform: skewX(0deg); /* Réinitialise l'angle */
         }
 
+        /* Grille principale du site */
         .container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -85,6 +86,7 @@
             overflow: hidden;
         }
 
+        /* Style des carrés dans la grille */
         .square {
             background-color: #ffffff;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -102,7 +104,7 @@
             box-shadow: -10px -10px 20px rgba(0, 204, 255, 0.089);
             transform: translate(6px, 0);
         }
-       
+
         /* Animation de rotation des carrés */
         @keyframes rotate {
             from {
@@ -128,6 +130,7 @@
             transition: transform 1.5s ease-in-out;
         }
 
+        /* Style pour le titre principal */
         .titre {
             color: rgb(0, 0, 0);
             font-family: 'Wix Madefor Text', sans-serif; 
@@ -142,7 +145,9 @@
             align-items: center;
             transition: color 0.3s ease;
         }
-        .NicolaImg{
+
+        /* Style pour l'image principale */
+        .NicolaImg {
             width: 400px;
             height: 400px;
             border-radius: 400px;
@@ -153,6 +158,8 @@
         .NicolaImg:hover {
             box-shadow: 0px 10px 10px rgba(0, 204, 255, 0.432);
         }
+
+        /* Style pour les sous-titres */
         h2 {
             color: rgb(0, 0, 0);
             font-size: 2.5em;
@@ -163,17 +170,19 @@
             transition: width 0.5s ease, color 0.3s ease;
         }
 
+        /* Animation pour l'effet de saisie */
         @keyframes typing {
             from { width: 0; }
             to { width: 60%; }
         }
 
+        /* Animation pour l'effet de clignotement du curseur */
         @keyframes blink-caret {
             from, to { border-color: transparent; }
             50% { border-color: rgba(0, 195, 255, 0.822); }
         }
 
-        /* Lien --------------*/
+        /* Style pour les liens du menu */
         .links {
             display: flex;
             gap: 40px;
@@ -187,6 +196,8 @@
             border-radius: 100%;
             box-shadow: 0px 10px 10px rgba(0, 204, 255, 0.432);
         }
+
+        /* Délai d'apparition pour chaque lien */
         .links a:nth-child(1) {
             animation-delay: 1.9s;
         }
@@ -199,11 +210,14 @@
             animation-delay: 2.9s;
         }
 
+        /* Animation pour l'effet d'apparition */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        .experience{
+
+        /* Section expérience professionnelle */
+        .experience {
             color: rgb(0, 0, 0);
             font-family: 'Wix Madefor Text', sans-serif; 
             position: absolute;
@@ -217,6 +231,8 @@
             align-items: center;
             transition: color 0.3s ease;
         }
+
+        /* Conteneur pour les cartes dans la section expérience */
         .card-container {
             display: grid;
             flex-direction: row;
@@ -225,7 +241,8 @@
             grid-template-columns: repeat(3, 1fr); 
             gap: 10px;
         }
-        
+
+        /* Style pour les cartes avec effet de perspective */
         .card {
             perspective: 1000px;
             position: relative;
@@ -234,7 +251,8 @@
             overflow: hidden;
             border-radius: 300px;
         }
-    
+
+        /* Intérieur des cartes avec effet de rotation */
         .card-inner {
             width: 100%;
             height: 100%;
@@ -242,13 +260,14 @@
             transform-style: preserve-3d;
             position: relative;
             border-radius: 300px;
-            
         }
-    
+
+        /* Effet de rotation des cartes au survol */
         .card:hover .card-inner {
             transform: rotateY(180deg);
         }
-    
+
+        /* Faces avant et arrière des cartes */
         .card-front, .card-back {
             width: 100%;
             height: 100%;
@@ -261,20 +280,21 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-         
             box-sizing: border-box;
         }
-    
+
         .card-front {
             background-color: #ffffff;
             z-index: 2;
         }
-    
+
         .card-back {
             background-color: #000000;
             color: white;
             transform: rotateY(180deg);
         }
+
+        /* Style des images dans les cartes */
         .card img {
             width: 100%;
             height: 100%;
@@ -282,14 +302,18 @@
             object-fit: cover;
             z-index: 1;
         }
-        h4{
+
+        /* Style des titres des cartes */
+        h4 {
             font-size: 2.5em;
             color: #000000;
         }
-        .Langue h4{
+
+        .Langue h4 {
             font-size: 1.2em;
             color: #fff;
         }
+
         .card h3 {
             position: absolute;
             top: 0;
@@ -301,14 +325,14 @@
             justify-content: center;
             align-items: center;
             padding: 10px;
-           
             color: #ffffff;
             font-size: 2.0em;
             text-align: center;
             z-index: 2;
         }
 
-        .about{
+        /* Section "À propos" */
+        .about {
             color: rgb(0, 0, 0);
             font-family: 'Wix Madefor Text', sans-serif; 
             position: absolute;
@@ -322,20 +346,25 @@
             align-items: center;
             transition: color 0.3s ease;
         }
-        p{
+
+        /* Style des paragraphes */
+        p {
             margin-top: 20px;
             font-size: 1.0em;
             text-align: center;
             line-height: 2;
         }
-        .nuitButton{
+
+        /* Style des boutons de nuit */
+        .nuitButton {
             margin: 10px;
             border: #ffffff00;
             background-color: rgba(0, 0, 0, 0);
             overflow-y: hidden;
             transition: 0.9s ease;
         }
-        /* Définir l'animation */
+
+        /* Animation de mouvement du bouton de nuit */
         @keyframes moveUpDown {
             0% {
                 transform: translateY(0px);
@@ -361,13 +390,11 @@
             display: flex; 
             flex-direction: column;
             z-index: 2;
-            /* l'animation */
-            animation: moveUpDown 1s infinite;
+            animation: moveUpDown 1s infinite; /* Animation de montée et descente */
         }
 
-
-        /* -------Language                    ---------------*/
-        .Langue{
+        /* Section Langue */
+        .Langue {
             color: rgb(0, 0, 0);
             font-family: 'Wix Madefor Text', sans-serif; 
             position: absolute;
@@ -386,7 +413,7 @@
             border: 2px solid #ffffff;
         }
         
-        /* Style du conteneur de diaporama */
+        /* Style du conteneur de diaporama des langues */
         .carreLangue {
             height: 100px;
             width: 99%;
@@ -420,14 +447,13 @@
             user-select: none;
             cursor: grab;
         }
-        .carousel-item img{
+        .carousel-item img {
            width: 64px;
            height: 64px;
         }
-        h2{
-            font-size: 2.0em;
-        }
-        .contact{
+
+        /* Style pour le titre de la section contact */
+        .contact {
             color: rgb(255, 255, 255);
             font-family: 'Wix Madefor Text', sans-serif; 
             font-size: 1.3em;
@@ -449,9 +475,10 @@
         .contact:hover {
             box-shadow: 0px 5px 10px rgba(0, 204, 255, 0.432);
         }
-        @media screen and (max-width: 1860px) {
 
-            .NicolaImg{
+        /* Styles responsives */
+        @media screen and (max-width: 1860px) {
+            .NicolaImg {
                 width: 350px;
                 height: 350px;
             }
@@ -461,7 +488,6 @@
             .flechebas {
                 left: 47%;
                 top: 670px;
-            
             }
         }
         @media screen and (max-width: 1000px) {
@@ -480,12 +506,12 @@
             .card p {
                 font-size: 0.9em;
             }
-            .Langue{
+            .Langue {
                 width: 80%;
             }
         }
         @media screen and (max-width: 660px) {
-            .flechebas{
+            .flechebas {
                 display: none;
             }
             .card {
@@ -512,15 +538,19 @@
             }
         }
     </style>
+
 </head>
 <body>
+
+    <!-- Section du menu avec le bouton pour l'ouvrir et le fermer -->
     <div class="Menu">
         <img src="menu (1).png" alt="Menu" id="menuButton">
         <img src="lettre-x.png" alt="Fermer" id="closeButton" style="display:none;">
     </div>
     
+    <!-- Menu déroulant caché par défaut -->
     <div class="slide-menu" id="slideMenu">
-        <!-- Contenu du menu -->
+        <!-- Contenu du menu avec des liens vers différentes sections de la page -->
         <ul>
             <li><a href="">Englais</a></li>
             <li><a href="#about">À propos</a></li>
@@ -529,8 +559,13 @@
             <li><a href="mailto:nbake013@uottawa.ca">Contact</a></li>
         </ul>
     </div>
+    
+    <!-- Conteneur principal du contenu de la page -->
     <div class="container">
+        <!-- Bouton pour basculer entre les modes nuit et jour -->
         <div><button id="nuitButton" class="nuitButton"><img id="nuitButtonImg" src="nuit-jour.png" alt="Nuit"></button></div>
+        
+        <!-- Section du titre avec le nom de Nicola Baker et des liens vers ses profils en ligne -->
         <div class="titre">
             <img class="NicolaImg" src="NicolaBourse.jpg" alt="Nicola">
             <h2>Nicola Baker</h2>
@@ -546,17 +581,22 @@
                 </a>
             </div>
         </div>
+        
+        <!-- Section À propos -->
         <div class="about" id="about">
             <img src="citation.png" alt="'">
             <p>Je travaille actuellement à temps partiel dans le service clientèle chez Baker Design, ce qui me permet d'acquérir de l'expérience dans les relations avec la clientèle.
-
                 Je travaille également en tant que web designer. Je suis responsable de tous les aspects du site web, y compris l'interface, les langages de programmation, et j'effectue également des analyses de résultats.
-                
-                Dans le cadre de mon stage, mon objectif est de devenir un ingénieur logiciel compétent, d'innover dans la technologie, et de faire une contribution positive à la société.</p>
+                Dans le cadre de mon stage, mon objectif est de devenir un ingénieur logiciel compétent, d'innover dans la technologie, et de faire une contribution positive à la société.
+            </p>
         </div>
+        
+        <!-- Section Expérience -->
         <div class="experience" id="experience">
             <h4>Expérience</h4>
+            <!-- Conteneur pour les cartes d'expérience -->
             <div class="card-container">
+                <!-- Carte pour l'expérience de programmeur -->
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
@@ -568,6 +608,8 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Carte pour l'expérience de blogueur -->
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
@@ -575,11 +617,12 @@
                             <h3>Blog</h3>
                         </div>
                         <div class="card-back">
-                            <p> Assurer une expérience optimale pour l'utilisateur tout en garantissant la stabilité des 
-                                navigateurs.</p>
+                            <p>Assurer une expérience optimale pour l'utilisateur tout en garantissant la stabilité des navigateurs.</p>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Carte pour l'expérience de gestion des réseaux sociaux -->
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
@@ -587,10 +630,12 @@
                             <h3>Réseau social</h3>
                         </div>
                         <div class="card-back">
-                            <p>Créer des publications sur les réseaux sociaux</p>
+                            <p>Créer des publications sur les réseaux sociaux.</p>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Carte pour l'expérience en UI/UX -->
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
@@ -598,11 +643,12 @@
                             <h3>UI/UX</h3>
                         </div>
                         <div class="card-back">
-                            <p> Assurer une expérience optimale pour l'utilisateur tout en garantissant la stabilité des 
-                                navigateurs.</p>
+                            <p>Assurer une expérience optimale pour l'utilisateur tout en garantissant la stabilité des navigateurs.</p>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Carte pour l'expérience de vendeur -->
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
@@ -610,10 +656,12 @@
                             <h3>Vendeur</h3>
                         </div>
                         <div class="card-back">
-                            <p>Créer et présenter des devis aux clients. Servir les clients et répondre à leurs questions. Mettre les prix sur les nouveaux articles ou les anciens à jour</p>
+                            <p>Créer et présenter des devis aux clients. Servir les clients et répondre à leurs questions. Mettre les prix sur les nouveaux articles ou les anciens à jour.</p>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Carte pour l'expérience de livreur -->
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
@@ -621,10 +669,12 @@
                             <h3>Deliveur</h3>
                         </div>
                         <div class="card-back">
-                            <p>Conduire différents véhicules pour livrer de la marchandise. Recevoir les commandes et les placer dans l’entrepôt approprie</p>
+                            <p>Conduire différents véhicules pour livrer de la marchandise. Recevoir les commandes et les placer dans l’entrepôt approprié.</p>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Carte pour l'expérience d'installateur -->
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
@@ -632,10 +682,12 @@
                             <h3>Instalateur</h3>
                         </div>
                         <div class="card-back">
-                            <p>Installer divers matériaux avec l’utilisation de plusieurs outils</p>
+                            <p>Installer divers matériaux avec l’utilisation de plusieurs outils.</p>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Carte pour l'expérience de commis -->
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
@@ -643,17 +695,22 @@
                             <h3>Commis</h3>
                         </div>
                         <div class="card-back">
-                            <p>Traiter les commandes et créer des codes-barres pour chaque produit. Placer les articles sur les tablettes</p>
+                            <p>Traiter les commandes et créer des codes-barres pour chaque produit. Placer les articles sur les tablettes.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Bouton pour faire défiler vers le bas de la page -->
         <button id="flechebas" class="flechebas">
-            <img id="flechebasImg" src="Bas.png" alt="Bas">
+            <img id="flechebasImg" src="bas.png" alt="Bas">
         </button>
+        
+        <!-- Section Langue -->
         <div class="Langue" id="langue">
             <h4>Language</h4>
+            <!-- Carrousel pour afficher les différents langages de programmation -->
             <div class="carreLangue">
                 <div class="carousel-container" id="carouselContainer">
                     <div class="carousel-track" id="carouselTrack">
@@ -672,76 +729,86 @@
                 </div>
             </div>
         </div>
- 
+     
+        <!-- Bouton de contact -->
         <a href="mailto:nbake013@uottawa.ca"><button class="contact">contact</button></a>
      
         <!-- Génération dynamique de rectangles -->
         <script>
+            // Ajoute un effet de défilement en douceur lorsqu'un lien du menu est cliqué
             document.querySelectorAll('.slide-menu a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
+                    e.preventDefault();  // Empêche le comportement par défaut du lien
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
+                        behavior: 'smooth'  // Défilement en douceur jusqu'à la section cible
                     });
                 });
             });
-
+        
+            // Références aux boutons du menu et au menu coulissant
             const menuButton = document.getElementById('menuButton');
             const closeButton = document.getElementById('closeButton');
             const slideMenu = document.getElementById('slideMenu');
-
+        
+            // Affiche le menu coulissant lorsqu'on clique sur le bouton du menu
             menuButton.addEventListener('click', function() {
-                slideMenu.classList.add('show-menu');
-                menuButton.style.display = 'none';
-                closeButton.style.display = 'inline'; // Montre le bouton de fermeture
+                slideMenu.classList.add('show-menu');  // Ajoute la classe pour montrer le menu
+                menuButton.style.display = 'none';  // Cache le bouton du menu
+                closeButton.style.display = 'inline';  // Montre le bouton de fermeture
             });
-
+        
+            // Cache le menu coulissant lorsqu'on clique sur le bouton de fermeture
             closeButton.addEventListener('click', function() {
-                slideMenu.classList.remove('show-menu');
-                closeButton.style.display = 'none';
-                menuButton.style.display = 'inline'; // Montre le bouton du menu
+                slideMenu.classList.remove('show-menu');  // Retire la classe pour cacher le menu
+                closeButton.style.display = 'none';  // Cache le bouton de fermeture
+                menuButton.style.display = 'inline';  // Montre le bouton du menu
             });
-
-
+        
+            // Crée 500 carrés dans le conteneur avec une classe supplémentaire pour chaque 10ème carré
             const numSquares = 500;
             const container = document.querySelector('.container');
         
             for (let i = 0; i < numSquares; i++) {
                 const square = document.createElement('div');
-                square.classList.add('square');
+                square.classList.add('square');  // Ajoute la classe 'square' à chaque div créée
                 if (i % 10 === 0) {
-                    square.classList.add('black');
+                    square.classList.add('black');  // Ajoute la classe 'black' pour chaque 10ème carré
                 }
-                container.appendChild(square);
+                container.appendChild(square);  // Ajoute le carré au conteneur
             }
         
             // Fonction pour basculer entre le mode Nuit et le mode Jour
-            let nuitMode = false;
+            let nuitMode = false;  // État du mode Nuit
             const nuitButton = document.getElementById('nuitButton');
             var image = document.getElementById('nuitButtonImg');
             var Flecheimg = document.getElementById('flechebasImg');
             let autoNuitInterval;
-
+        
             function toggleNuitMode() {
+                // Parcours chaque carré pour ajuster son apparence selon le mode activé
                 document.querySelectorAll('.square').forEach((square, index) => {
-                    const delay = (index % 10) * 0.1; // Ajustez ce facteur selon vos besoins
+                    const delay = (index % 10) * 0.1;  // Délai pour l'effet de transition
+        
                     square.style.transitionDelay = `${delay}s`;
-
+        
                     if (nuitMode) {
-                        square.style.backgroundColor = '';  // Remet à la couleur d'origine
-                        square.classList.remove('rotate');  // Enlève l'animation de rotation
-                        square.classList.add('animate');    // Réinitialise l'animation
+                        // Mode Jour : réinitialise les couleurs et les animations
+                        square.style.backgroundColor = '';  
+                        square.classList.remove('rotate');
+                        square.classList.add('animate');
                         image.src = 'nuit-jour.png';
-                        Flecheimg.src = 'Img/Jour/Bas.png';
+                        Flecheimg.src = 'Bas.png';
                     } else {
-                        square.style.backgroundColor = '#000000';  // Passe au mode Nuit
-                        square.classList.remove('animate');  // Supprime la classe de réinitialisation
-                        square.classList.add('rotate');  // Ajoute l'animation de rotation
+                        // Mode Nuit : applique les couleurs sombres et les animations de rotation
+                        square.style.backgroundColor = '#000000';  
+                        square.classList.remove('animate');
+                        square.classList.add('rotate');
                         image.src = 'nuit-jour (1).png';
-                        Flecheimg.src = 'Img/Nuit/Basn.png';
+                        Flecheimg.src = 'Basn.png';
                     }
                 });
-
+        
+                // Change les couleurs du corps de la page et du texte selon le mode activé
                 document.body.style.backgroundColor = nuitMode ? '#ffffff' : '#000000';
                 document.body.style.color = nuitMode ? '#000000' : '#ffffff';
                 document.querySelector('.titre').style.color = nuitMode ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
@@ -750,75 +817,78 @@
                 document.querySelector('p').style.color = nuitMode ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
                 document.querySelector('h4').style.color = nuitMode ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
                 document.querySelector('h2').style.borderRightColor = nuitMode ? 'rgb(0, 153, 255)' : 'rgb(255, 255, 255)';
-
-                nuitMode = !nuitMode;  // Bascule l'état
+        
+                nuitMode = !nuitMode;  // Bascule l'état du mode Nuit
             }
-
+        
+            // Active ou désactive le mode Nuit lorsqu'on clique sur le bouton correspondant
             nuitButton.addEventListener('click', () => {
                 toggleNuitMode();
-                // Stop automatic toggle when manually toggled
+                // Arrête le basculement automatique lorsque le mode est modifié manuellement
                 clearInterval(autoNuitInterval);
-            
             });
-
+        
+            // Défilement vers le bas lorsqu'on clique sur le bouton de la flèche
             const flechebasButton = document.getElementById('flechebas');
             flechebasButton.addEventListener('click', () => {
                 window.scrollBy({ top: 600, behavior: 'smooth' });
             });
-
+        
+            // Carousel d'éléments avec la fonctionnalité de glisser pour naviguer
             const carouselContainer = document.getElementById('carouselContainer');
             const carouselTrack = document.getElementById('carouselTrack');
             const carouselItems = document.querySelectorAll('.carousel-item');
-            const itemWidth = carouselItems[0].offsetWidth + 40; // Including gap
+            const itemWidth = carouselItems[0].offsetWidth + 40; // Largeur de chaque élément + l'espace entre eux
             let isDragging = false;
             let startPos = 0;
             let currentTranslate = 0;
             let prevTranslate = 0;
             const numVisibleItems = 3; // Nombre d'éléments visibles à l'écran
             const trackWidth = carouselItems.length * itemWidth;
-
-            // Dupliquer les éléments pour un effet de boucle
+        
+            // Dupliquer les éléments pour créer un effet de boucle infinie
             carouselTrack.innerHTML += carouselTrack.innerHTML;
-
+        
+            // Événements pour le glissement : début, mouvement et fin du glissement
             carouselContainer.addEventListener('mousedown', dragStart);
             carouselContainer.addEventListener('mousemove', dragMove);
             carouselContainer.addEventListener('mouseup', dragEnd);
             carouselContainer.addEventListener('mouseleave', dragEnd);
-
+        
             function dragStart(e) {
                 isDragging = true;
-                startPos = e.clientX;
-                carouselContainer.style.cursor = 'grabbing';
+                startPos = e.clientX;  // Position de départ du glissement
+                carouselContainer.style.cursor = 'grabbing';  // Change le curseur
             }
-
+        
             function dragMove(e) {
                 if (!isDragging) return;
                 const currentPos = e.clientX;
-                const moveBy = currentPos - startPos;
-                currentTranslate = prevTranslate + moveBy;
+                const moveBy = currentPos - startPos;  // Calcule la distance du glissement
+                currentTranslate = prevTranslate + moveBy;  // Calcule la nouvelle position du track
                 carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
             }
-
+        
             function dragEnd() {
                 isDragging = false;
-                carouselContainer.style.cursor = 'grab';
-
-                // Snap to the closest item
+                carouselContainer.style.cursor = 'grab';  // Rétablit le curseur
+        
+                // Ajuste la position pour aligner avec l'élément le plus proche
                 const index = Math.round(-currentTranslate / itemWidth);
                 const newTranslate = -index * itemWidth;
-
+        
                 carouselTrack.style.transition = 'transform 0.5s ease';
                 carouselTrack.style.transform = `translateX(${newTranslate}px)`;
                 prevTranslate = newTranslate;
-
+        
                 // Ajustement pour l'effet de boucle infinie
                 if (index >= carouselItems.length) {
                     setTimeout(() => {
-                        carouselTrack.style.transition = 'none'; // Disable transition for smooth reset
+                        carouselTrack.style.transition = 'none'; // Désactive la transition pour un réinitialisation fluide
                         carouselTrack.style.transform = `translateX(0)`;
                         prevTranslate = 0;
                         setTimeout(() => {
-                            carouselTrack.style.transition = 'transform 0.5s ease'; // Re-enable smooth transition
+                            carouselTrack.style.transition = 'transform 0.5s ease'; // Réactive la transition
                         }, 50);
                     }, 500);
                 } else if (index < 0) {
@@ -832,16 +902,17 @@
                     }, 500);
                 }
             }
-
+        
+            // Fait défiler automatiquement le carousel toutes les 7 secondes
             function autoSlide() {
                 const maxMove = -itemWidth * (carouselItems.length - numVisibleItems);
                 currentTranslate -= itemWidth;
-
+        
                 if (currentTranslate <= maxMove) {
                     carouselTrack.style.transition = 'none';
                     carouselTrack.style.transform = `translateX(0)`;
                     currentTranslate = 0;
-
+        
                     setTimeout(() => {
                         carouselTrack.style.transition = 'transform 0.5s ease';
                     }, 50);
@@ -849,13 +920,12 @@
                     carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
                 }
             }
-
-            // Auto slide every 5 seconds
+        
             setInterval(autoSlide, 7000);
-
-            // Basculer le mode nuit/jour toutes
+        
+            // Bascule le mode nuit/jour toutes les 40 secondes
             setInterval(toggleNuitMode, 40000);
-        </script>
+        </script>        
         
     </div>
 </body>
