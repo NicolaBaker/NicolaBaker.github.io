@@ -31,25 +31,41 @@
             right: 10px;
             z-index: 3;
         }
+        .menu-button {
+            width: 32px; 
+            height: 32px; 
+            transition: background-image 0.3s ease; /* Transition pour l'effet de survol */
+            background-size: cover; /* Assurez-vous que l'image couvre le bouton */
+        }
 
+        /* Image par défaut du bouton de menu */
+        .menu-button.default {
+            background-image: url('menu (1).png');
+        }
+
+        /* Image au survol du bouton de menu */
+        .menu-button:hover {
+            background-image: url('menu.png'); 
+        }
         #closeButton {
             position: fixed;
-            right: 270px; /* Position du bouton de fermeture */
+            right: 220px; /* Position du bouton de fermeture */
             top: 20px;
             display: none; /* Masqué par défaut */
+            width: 32px;
         }
 
         .slide-menu {
             position: fixed;
             top: 0;
-            right: -350px; /* Menu caché hors de l'écran */
-            width: 250px;
+            right: -400px; /* Menu caché hors de l'écran */
+            width: 200px;
             height: 100%;
-            background-color: #333;
-            color: #fff;
+            background-color: #000000;
+           
             box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
             z-index: 9999;
-            transform: skewX(-10deg); /* Applique un angle pour l'effet de glissement */
+            transform: skewX(-20deg); /* Applique un angle pour l'effet de glissement */
             transition: transform 0.4s ease, right 0.4s ease;
         }
 
@@ -67,6 +83,13 @@
             color: #fff;
             text-decoration: none;
             font-size: 1.2em;
+            
+        }
+
+        .slide-menu ul li a:hover {
+            color: rgba(0, 195, 255, 0.822);
+            font-size: 1.3em;
+            transition:  0.8s ease-in-out;
         }
 
         /* Classe pour montrer le menu (le ramener à l'écran) */
@@ -93,7 +116,7 @@
             width: 100%;
             height: 100%;
             border-radius: 15px;
-            box-shadow: -5px -5px 10px rgba(196, 196, 196, 0.082);
+            box-shadow: -5px -5px 10px rgba(196, 196, 196, 0.084);
             transform: translate(3px, 0);
         }
         .square.black {
@@ -101,7 +124,7 @@
         }
         .square:hover {
             background-color: #fcfcfc;
-            box-shadow: -10px -10px 20px rgba(0, 204, 255, 0.089);
+            box-shadow: -10px -10px 20px rgba(0, 204, 255, 0.111);
             transform: translate(6px, 0);
         }
 
@@ -346,6 +369,9 @@
             align-items: center;
             transition: color 0.3s ease;
         }
+        .infoimg{
+            width: 118px;
+        }
 
         /* Style des paragraphes */
         p {
@@ -475,16 +501,25 @@
         .contact:hover {
             box-shadow: 0px 5px 10px rgba(0, 204, 255, 0.432);
         }
-        footer {
+        .foot{
             position: absolute;
+            bottom: 4px; /* Ajustez cette valeur selon vos besoins */
+            left: 50%;
+            transform: translateX(-50%);
             color: var(--color-light);
             padding: 0ch;
-            right: 44%;
             z-index: 4;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        footer {
+            color: var(--color-light);
+            padding: 0ch;
             font-size: 0.6em;
             text-align: center;
-            bottom: 5px;
-          
         }
 
         footer p {
@@ -507,6 +542,15 @@
                 top: 670px;
             }
         }
+        @media screen and (max-width: 1600px) {
+            @keyframes typing {
+                from { width: 0; }
+                to { width: 70%; }
+            }
+            .about{
+                top: 1050px;
+            }
+        }
         @media screen and (max-width: 1000px) {
             .card {
                 perspective: 1000px;
@@ -523,14 +567,15 @@
             .card p {
                 font-size: 0.9em;
             }
+            .about{
+                width: 85%;
+            }
             .Langue {
-                width: 80%;
+                width: 90%;
             }
-        }
+            
+        }  
         @media screen and (max-width: 660px) {
-            footer {
-                right: 27%;
-            }
             .about{
                 top: 1000px;
                 width: 86%;
@@ -544,10 +589,10 @@
             .card {
                 perspective: 1000px;
                 position: relative;
-                width: 190px;
-                height: 190px;
+                width: 170px;
+                height: 170px;
                 overflow: hidden;
-                border-radius: 190px;
+                border-radius: 170px;
             }
             .card h3 {
                 position: absolute;
@@ -572,19 +617,19 @@
 
     <!-- Section du menu avec le bouton pour l'ouvrir et le fermer -->
     <div class="Menu">
-        <img src="menu (1).png" alt="Menu" id="menuButton">
-        <img src="lettre-x.png" alt="Fermer" id="closeButton" style="display:none;">
+        <img src="menu (1).png" alt="Menu" id="menuButton" class="menu-button default">
+        <img src="retirer.png" alt="Fermer" id="closeButton" style="display:none;">
     </div>
     
     <!-- Menu déroulant caché par défaut -->
     <div class="slide-menu" id="slideMenu">
         <!-- Contenu du menu avec des liens vers différentes sections de la page -->
         <ul>
-            <li><a href="">Englais</a></li>
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#experience">Expérience</a></li>
-            <li><a href="#langue">Langage</a></li>
-            <li><a href="mailto:nbake013@uottawa.ca">Contact</a></li>
+            <li><a class="enm" href="">Englais</a></li>
+            <li><a class="aboutm" href="#about">À propos</a></li>
+            <li><a class="experiencem" href="#experience">Expérience</a></li>
+            <li><a class="langagem" href="#langue">Langage</a></li>
+            <li><a class="contactm" href="mailto:nbake013@uottawa.ca">Contact</a></li>
         </ul>
     </div>
     
@@ -612,7 +657,7 @@
         
         <!-- Section À propos -->
         <div class="about" id="about">
-            <img src="citation.png" alt="'">
+            <img class="infoimg" src="citation (3).png" alt="'" id="infoimg">
             <p>Je travaille actuellement à temps partiel dans le service clientèle chez Baker Design, ce qui me permet d'acquérir de l'expérience dans les relations avec la clientèle.
                 Je travaille également en tant que web designer. Je suis responsable de tous les aspects du site web, y compris l'interface, les langages de programmation, et j'effectue également des analyses de résultats.
                 Dans le cadre de mon stage, mon objectif est de devenir un ingénieur logiciel compétent, d'innover dans la technologie, et de faire une contribution positive à la société.
@@ -629,23 +674,10 @@
                     <div class="card-inner">
                         <div class="card-front">
                             <img src="code.jpg" alt="code" />
-                            <h3>Programmeur</h3>
+                            <h3>Développeur web</h3>
                         </div>
                         <div class="card-back">
-                            <p>Utiliser le langage HTML, CSS, JavaScript pour créer et maintenir un site web.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Carte pour l'expérience de blogueur -->
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="ecriture (1).jpg" alt="design"  />
-                            <h3>Blog</h3>
-                        </div>
-                        <div class="card-back">
-                            <p>Assurer une expérience optimale pour l'utilisateur tout en garantissant la stabilité des navigateurs.</p>
+                            <p>Utiliser le langage HTML, CSS, JavaScript pour créer et maintenir un site web. Assurer une expérience optimale pour l'utilisateur tout en garantissant la stabilité des navigateurs.</p>
                         </div>
                     </div>
                 </div>
@@ -658,7 +690,7 @@
                             <h3>Réseau social</h3>
                         </div>
                         <div class="card-back">
-                            <p>Créer des publications sur les réseaux sociaux.</p>
+                            <p>Créer des publications sur les réseaux sociaux et rédaction de blog tout les 2 mois</p>
                         </div>
                     </div>
                 </div>
@@ -668,10 +700,10 @@
                     <div class="card-inner">
                         <div class="card-front">
                             <img src="ui-ux-design-website.jpg" alt="design"  />
-                            <h3>UI/UX</h3>
+                            <h3>Design UI/UX</h3>
                         </div>
                         <div class="card-back">
-                            <p>Assurer une expérience optimale pour l'utilisateur tout en garantissant la stabilité des navigateurs.</p>
+                            <p>Créer des interfaces utilisateur esthétiques, tout en optimisant l'expérience de navigation pour répondre aux besoins des utilisateurs.</p>
                         </div>
                     </div>
                 </div>
@@ -694,7 +726,7 @@
                     <div class="card-inner">
                         <div class="card-front">
                             <img src="delivery.jpg" alt="delivery" />
-                            <h3>Deliveur</h3>
+                            <h3>Livreur</h3>
                         </div>
                         <div class="card-back">
                             <p>Conduire différents véhicules pour livrer de la marchandise. Recevoir les commandes et les placer dans l’entrepôt approprié.</p>
@@ -759,12 +791,14 @@
         </div>
      
         <!-- Bouton de contact -->
-        <a href="mailto:nbake013@uottawa.ca"><button class="contact">contact</button></a>
-        <footer>
-			<p>
-				Copyright &copy; 2024 NicolaBaker.
-			</p>		
-	    </footer>
+        <a href="mailto:nbake013@uottawa.ca"><button class="contact">Contact</button></a>
+        <div class="foot">
+            <footer>
+                <p>
+                    Copyright &copy; 2024 NicolaBaker.
+                </p>		
+            </footer>
+        </div>
         <!-- Génération dynamique de rectangles -->
         <script>
             // Ajoute un effet de défilement en douceur lorsqu'un lien du menu est cliqué
@@ -809,11 +843,14 @@
                 container.appendChild(square);  // Ajoute le carré au conteneur
             }
         
-            // Fonction pour basculer entre le mode Nuit et le mode Jour
+            // Fonction pour basculer entre le mode Nuit et le mode Jour 
             let nuitMode = false;  // État du mode Nuit
             const nuitButton = document.getElementById('nuitButton');
             var image = document.getElementById('nuitButtonImg');
             var Flecheimg = document.getElementById('flechebasImg');
+            var menuimg = document.getElementById('menuButton');
+            var ximg = document.getElementById('closeButton');
+            var aboutimg = document.getElementById('infoimg');
             let autoNuitInterval;
         
             function toggleNuitMode() {
@@ -830,6 +867,9 @@
                         square.classList.add('animate');
                         image.src = 'nuit-jour.png';
                         Flecheimg.src = 'Bas.png';
+                        menuimg.src = 'menu (1).png';
+                        ximg.src = 'retirer.png';
+                        aboutimg.src = 'citation (3).png';
                     } else {
                         // Mode Nuit : applique les couleurs sombres et les animations de rotation
                         square.style.backgroundColor = '#000000';  
@@ -837,6 +877,9 @@
                         square.classList.add('rotate');
                         image.src = 'nuit-jour (1).png';
                         Flecheimg.src = 'Basn.png';
+                        menuimg.src = 'menu (1) nuit.png';
+                        ximg.src = 'retirer (1).png';
+                        aboutimg.src = 'citation.png';
                     }
                 });
         
@@ -848,6 +891,12 @@
                 document.querySelector('h2').style.color = nuitMode ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
                 document.querySelector('p').style.color = nuitMode ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
                 document.querySelector('h4').style.color = nuitMode ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
+                document.querySelector('.enm').style.color = nuitMode ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
+                document.querySelector('.aboutm').style.color = nuitMode ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
+                document.querySelector('.experiencem').style.color = nuitMode ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
+                document.querySelector('.langagem').style.color = nuitMode ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
+                document.querySelector('.contactm').style.color = nuitMode ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
+                document.querySelector('.slide-menu').style.backgroundColor = nuitMode ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
                 document.querySelector('h2').style.borderRightColor = nuitMode ? 'rgb(0, 153, 255)' : 'rgb(255, 255, 255)';
         
                 nuitMode = !nuitMode;  // Bascule l'état du mode Nuit
