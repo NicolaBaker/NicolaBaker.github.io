@@ -176,10 +176,11 @@
             border-radius: 400px;
             object-fit: cover;
             transition: box-shadow 0.3s ease;
+            box-shadow: 0px 10px 10px rgba(0, 204, 255, 0.432);
             z-index: 3;
         }
         .NicolaImg:hover {
-            box-shadow: 0px 10px 10px rgba(0, 204, 255, 0.432);
+            box-shadow: 0px 15px 15px rgba(0, 204, 255, 0.486);
         }
 
         /* Style pour les sous-titres */
@@ -307,7 +308,7 @@
         }
 
         .card-front {
-            background-color: #ffffff;
+            background-color: #ffffff00;
             z-index: 2;
         }
 
@@ -339,20 +340,21 @@
 
         .card h3 {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centre parfaitement le texte */
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
+            padding: 0;
             color: #ffffff;
             font-size: 2.0em;
             text-align: center;
             z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+
 
         /* Section "À propos" */
         .about {
@@ -375,10 +377,11 @@
 
         /* Style des paragraphes */
         p {
-            margin-top: 20px;
+            margin-top: 10px;
             font-size: 1.0em;
             text-align: center;
             line-height: 2;
+            padding: 10px;
         }
 
         /* Style des boutons de nuit */
@@ -390,34 +393,33 @@
             transition: 0.9s ease;
         }
 
-        /* Animation de mouvement du bouton de nuit */
+        .flechebas {
+            position: absolute;
+            top: 800px;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centre l'élément à la fois horizontalement et verticalement */
+            border: none;
+            background-color: rgba(0, 0, 0, 0); /* Fond transparent */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            animation: moveUpDown 1s infinite; /* Animation de montée et descente */
+            transition: 0.9s ease;
+        }
+
         @keyframes moveUpDown {
             0% {
-                transform: translateY(0px);
+                transform: translate(-50%, -50%) translateY(0px);
             }
             50% {
-                transform: translateY(10px);
+                transform: translate(-50%, -50%) translateY(10px);
             }
             100% {
-                transform: translateY(0px);
+                transform: translate(-50%, -50%) translateY(0px);
             }
         }
 
-        .flechebas {
-            align-items: center;
-            justify-content: center;
-            border: #ffffff00;
-            background-color: rgba(0, 0, 0, 0);
-            position: absolute;
-            left: 48%;
-            transform: translate(-50%, -50%);
-            top: 800px;
-            transition: 0.9s ease;
-            display: flex; 
-            flex-direction: column;
-            z-index: 2;
-            animation: moveUpDown 1s infinite; /* Animation de montée et descente */
-        }
 
         /* Section Langue */
         .Langue {
@@ -542,7 +544,6 @@
                 top: 340px;
             }
             .flechebas {
-                left: 47%;
                 top: 670px;
             }
         }
@@ -677,7 +678,7 @@
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="code.jpg" alt="code" />
+                            <img src="Web-Developers.jpg" alt="code" />
                             <h3>Développeur web</h3>
                         </div>
                         <div class="card-back">
@@ -694,7 +695,7 @@
                             <h3>Réseau social</h3>
                         </div>
                         <div class="card-back">
-                            <p>Créer des publications sur les réseaux sociaux et rédaction de blog tout les 2 mois</p>
+                            <p>Créer des publications sur les réseaux sociaux et rédaction de blog tout les 2 mois.</p>
                         </div>
                     </div>
                 </div>
@@ -767,6 +768,7 @@
         </div>
         
         <!-- Bouton pour faire défiler vers le bas de la page -->
+         
         <button id="flechebas" class="flechebas">
             <img id="flechebasImg" src="bas.png" alt="Bas">
         </button>
@@ -806,15 +808,28 @@
         <!-- Génération dynamique de rectangles -->
         <script>
             // Ajoute un effet de défilement en douceur lorsqu'un lien du menu est cliqué
-            document.querySelectorAll('.slide-menu a').forEach(anchor => {
+            document.querySelectorAll('.slide-menu a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();  // Empêche le comportement par défaut du lien
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'  // Défilement en douceur jusqu'à la section cible
-                    });
+
+                    const targetId = this.getAttribute('href');  // Récupère l'ID de la section cible
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        // Obtenez la position de l'élément cible
+                        const targetPosition = targetElement.getBoundingClientRect().top;
+
+                        // Faites défiler le contenu du conteneur sans affecter le body
+                        window.scrollBy({
+                            top: targetPosition,
+                            behavior: 'smooth'  // Défilement en douceur jusqu'à la section cible
+                        });
+                    }
                 });
             });
-        
+
+
+           
             // Références aux boutons du menu et au menu coulissant
             const menuButton = document.getElementById('menuButton');
             const closeButton = document.getElementById('closeButton');
