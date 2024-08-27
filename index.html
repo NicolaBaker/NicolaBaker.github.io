@@ -387,11 +387,21 @@
         /* Style des boutons de nuit */
         .nuitButton {
             margin: 10px;
-            border: #ffffff00;
+            width: 38px;
+         
+            border: none; /* Utilisez 'none' pour enlever la bordure */
             background-color: rgba(0, 0, 0, 0);
-            overflow-y: hidden;
+            overflow: hidden; /* Assure que rien ne dépasse du conteneur */
             transition: 0.9s ease;
         }
+
+        .nuitButton img {
+            width: 100%; /* L'image occupe toute la largeur du bouton */
+            height: 100%; /* L'image occupe toute la hauteur du bouton */
+            object-fit: cover; /* Maintient les proportions de l'image tout en remplissant le conteneur */
+            display: block; /* Supprime les marges internes autour de l'image */
+        }
+
 
         .flechebas {
             position: absolute;
@@ -866,7 +876,7 @@
             let nuitMode = false;  // État du mode Nuit
             const nuitButton = document.getElementById('nuitButton');
             var image = document.getElementById('nuitButtonImg');
-            var Flecheimg = document.getElementById('flechebasImg');
+            var FlecheTelimg = document.getElementById('flechebasImg');
             var menuimg = document.getElementById('menuButton');
             var ximg = document.getElementById('closeButton');
             var aboutimg = document.getElementById('infoimg');
@@ -885,17 +895,17 @@
                         square.classList.remove('rotate');
                         square.classList.add('animate');
                         image.src = 'nuit-jour.png';
-                        Flecheimg.src = 'Bas.png';
+                        FlecheTelimg.src = 'Bas.png';
                         menuimg.src = 'menu (1).png';
                         ximg.src = 'retirer.png';
                         aboutimg.src = 'citation (3).png';
                     } else {
-                        // Mode Nuit : applique les couleurs sombres et les animations de rotation
+                        // Mode Nuit : applique les couleurs sombres et les animations de rotation ---- Blanc
                         square.style.backgroundColor = '#000000';  
                         square.classList.remove('animate');
                         square.classList.add('rotate');
                         image.src = 'nuit-jour (1).png';
-                        Flecheimg.src = 'Basn.png';
+                        FlecheTelimg.src = 'Basn.png';
                         menuimg.src = 'menu (1) nuit.png';
                         ximg.src = 'retirer (1).png';
                         aboutimg.src = 'citation.png';
