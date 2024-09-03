@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{EN.html} !-d
+    RewriteCond %{index.html} !-f
+    RewriteRule ^([^\.]+)$ $1.html [NC,L]
+</IfModule>
