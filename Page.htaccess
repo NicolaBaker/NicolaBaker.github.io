@@ -1,6 +1,13 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{EN.html} !-d
-    RewriteCond %{index.html} !-f
+
+    # redirige vers 'EN.html'
+    RewriteRule ^EN$ EN.html [NC,L]
+
+    # Si une autre requête ne correspond pas à un dossier
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # sans extension vers des fichiers HTML correspondants
     RewriteRule ^([^\.]+)$ $1.html [NC,L]
 </IfModule>
