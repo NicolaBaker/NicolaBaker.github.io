@@ -23,6 +23,25 @@
             scroll-behavior: smooth;
         }
       
+        img {
+            -webkit-user-drag: none; /* Empêche le glissement de l'image */
+            -webkit-touch-callout: none; /* Empêche le menu contextuel sur les dispositifs tactiles */
+            outline: none;
+            user-select: none;
+        }
+
+        /* Mode jour */
+        .day-mode ::selection {
+            background-color: #000000; /* le surlignage en mode jour */
+            color: white; 
+        }
+
+        /* Mode nuit */
+        .night-mode ::selection {
+            background-color: #ffffff; /* le surlignage en mode nuit */
+            color: black;
+        }
+
         /* Style du menu coulissant */
 
         .Menu {
@@ -895,8 +914,13 @@
             var ximg = document.getElementById('closeButton');
             var aboutimg = document.getElementById('infoimg');
             let autoNuitInterval;
+            document.body.classList.toggle('day-mode', !nuitMode);
         
             function toggleNuitMode() {
+
+                document.body.classList.toggle('night-mode', !nuitMode);
+                document.body.classList.toggle('day-mode', nuitMode);
+                
                 // Parcours chaque carré pour ajuster son apparence selon le mode activé
                 document.querySelectorAll('.square').forEach((square, index) => {
                     const delay = (index % 10) * 0.1;  // Délai pour l'effet de transition
