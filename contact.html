@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+        label, input, textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        input, textarea {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Contactez-nous</h2>
+
+<form action="send_mail.php" method="post">
+    <label for="name">Nom :</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message :</label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+
+    <input type="submit" value="Envoyer">
+</form>
+
+</body>
+</html>
