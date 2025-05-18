@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nicola Baker</title>
+  <link rel="icon" type="image/x-icon" href="NB_nicola.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Wix Madefor Text', Arial, sans-serif;
+    }
+   
+    /*Menu ordi*/
+    .menubar {
+      position: fixed;
+      top: 0px;
+      left: 0;
+      width: 100%;
+      height: 12%;
+      background-color: #ffffff;
+      transition: top 0.3s ease-in-out;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+    .menubar h3 {
+      font-size: 5em;
+      font-weight: bold;
+      flex: 1;
+    }
+    .menubar .navMenu ul{
+      display: flex; 
+      list-style-type: none;
+    }
+    .menubar .navMenu ul li{
+      margin: 0 32px;
+      font-family: sans-serif;
+      color: #1a1a1a;
+    }
+    .menubar .navMenu ul li a {
+      text-decoration: none;
+      color: #1a1a1a;
+      font-size: 1.6em;
+      transition: color 0.3s ease;
+    }
+    .menubar .navMenu ul li a:hover {
+      color: #c0b19e;
+    }
+    .menuDroit{
+      flex: 1;
+    }
+    .menuDroit a{
+      outline: none;
+      text-decoration: none;
+    }
+    /*Buttom dans le menu ordi*/
+    .buttomContact {
+      display: flex;
+      text-decoration: none;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      background-color: #1a1a1a;
+      color: #eeeeee;
+      border: 2px solid #1a1a1a;
+      border-radius: 50px;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      width: 200px;
+      height: 55px;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: 75px;
+      overflow: hidden;
+      transition: color 0.5s cubic-bezier(0.19, 1, 0.22, 1), background-color 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .buttomContact span {
+      display: inline-block;
+      transform: translateX(0);
+      transition: transform 0.5s ease-out;
+    }
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%) translateX(0);
+      opacity: 0;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .buttomContact:hover span {
+      transform: translateX(-8px);
+    }
+    .buttomContact:hover .icon {
+      opacity: 1;
+      transform: translateY(-50%) translateX(4px);
+    }
+    .icon svg {
+      width: 12px;
+      fill: currentColor;
+    }
+    .nb_logo{
+      display: none;
+    }
+    /* Menu coulissant */
+    .menu {
+      display: none;
+      position: relative;
+      z-index: 999;
+      margin-left: 90%;
+    }
+    .menu-button {
+      margin-top: 2px;
+      width: 42px; 
+      height: 42px; 
+      transition: background-image 0.3s ease; 
+      background-size: cover; 
+    }
+    #closeButton {
+      position: fixed;
+      right: 220px;
+      top: 15px;
+      display: none; 
+      width: 32px;
+    }
+    .slide-menu {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 200px;
+      height: 100%;
+      background-color: #1a1a1a;
+      border-left: 1px solid rgb(255, 255, 255);
+      box-shadow: -5px 0 10px rgba(15, 15, 15, 0.2);
+      z-index: 9999;
+      transform: skewX(-20deg);
+      transition: transform 0.4s ease, right 0.4s ease;
+    }
+    .slide-menu ul {
+      list-style: none;
+      padding: 20px;
+      margin: 0;
+    }
+    .slide-menu ul li {
+      margin: 20px 0;
+    }
+    .slide-menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+    .slide-menu ul li a:hover {
+      color: #c0b19e;
+    }
+    .show-menu {
+      right: 0;
+      transform: skewX(0deg);
+    }
+
+    /*La page*/
+    .main-content {
+      display: flex;
+      width: 100%;
+      height: 400px; 
+      background-color: white;
+      color: #1a1a1a;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    /*La 1er section avec mon nom*/
+    .about {
+      background-color: #f6f4f1;
+      border-radius: 10px;
+      width: 97vw;
+      margin-top: 6%;
+      height: 91vh;
+      opacity: 0;
+      font-size: 2rem;
+      transition: opacity 1s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 10;
+      opacity: 1;
+    }
+    .moi-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 3;
+      padding: 20px;
+    }
+    h2 {
+      margin-top: 5px;
+      color: #1a1a1a;
+      font-size: 2.0em;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: .13em solid #c0b19e;
+      animation: typing 2s steps(30, end), blink-caret .85s step-end infinite;
+    }
+    
+    /* Animation pour leffet de clignotement du curseur */
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #c0b19e; }
+    }
+    
+    /*Le footer section*/
+    .footer {
+      background-color: #f6f4f1;
+      padding: 80px 20px;
+      width: 100%;
+      color: #1a1a1a;
+      font-family: "Neue Haas Grotesk", sans-serif;
+    }
+    .footer-container {
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      margin: 10px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+    .footer-text h3 {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .footer-text p {
+      font-size: 20px;
+      line-height: 1.6;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px; 
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+      margin-left: 50px;
+    }
+    .footer-links li {
+      display: flex;
+      align-items: center;
+    }
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: #353535; 
+    }
+    .arrow-icon {
+      width: 19px;
+      height: 19px;
+      margin-left: 10px;
+    }
+    .footer-links li a:hover .arrow-icon {
+      transform: translateX(8px);
+    }
+    .footer-bottom {
+      font-size: 14px;
+      color: #555;
+      margin-top: 30px;
+    }
+
+    /* Styles responsives MIN*/
+    @media (min-width: 1024px) {
+      /*footer*/
+      .footer-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-text {
+        max-width: 50%;
+      }
+      .footer-links {
+        flex: 1;
+        font-size: 1.7em;
+        padding-right: 60px;
+      }
+    }
+
+    /* Styles responsives MAX 1860px*/
+    @media screen and (max-width: 1860px) {
+
+      /*La hauteur du menu*/
+      .menubar {
+        height: 90px;
+      }
+
+    }
+
+    /* Styles responsives MAX 1000px*/
+    @media screen and (max-width: 1000px) {
+
+      /*Menu pour téléphone*/
+      .menu {
+        display: block;
+      }
+
+      /*La hauteur du menu*/
+      .menubar {
+        height: 60px;
+      }
+
+      /*Éfface le menu pour l'ordi*/
+      .menubar .navMenu ul{
+        display: none;
+      }
+      .menuDroit .buttomContact{
+        display: none;
+      }
+
+      /*Ajoute le nouveau logo*/
+      .nb_logo{
+        display: block;
+        margin-left: 45%;
+        font-family: sans-serif;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-size: 1.7em;
+        transition: color 0.3s ease;
+      }
+      
+
+    }  
+
+    /* Styles responsives MAX 660px*/
+    @media screen and (max-width: 660px) {
+
+      /*Menu pour téléphone*/
+      .menu-button {
+        width: 32px; 
+        height: 32px; 
+        transition: background-image 0.3s ease;
+        background-size: cover;
+      }
+
+      /*Ajuste ma section about*/
+      .about{
+        margin-top: 12.5%;
+        height: 65vh;
+        top: 1050px;
+        width: 89%;
+      }
+
+      /*Ajuste ma section footer*/
+      .footer-links {
+        margin-left: 10px;
+        margin-top: -70px;
+        margin-bottom: 20px;
+      }
+      .footer-text h3 {
+        font-size: 38px;
+        margin-bottom: 16px;
+      }
+      .footer-text p {
+        font-size: 15px;
+        line-height: 1.6;
+
+      }
+    }
+    @media (min-width: 968px) {
+      .counter { 
+        font-size: 22rem; 
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Contenu principal du site -->
+  <div class="main-content" id="main-content">
+
+    <!-- Barre de navigation du haut MENU -->
+    <nav class="menubar" id="menubar">
+      <div class="navMenu">
+        <ul>
+          <li><a href="index.html"><strong>NB</strong></a></li>
+          <li><a href="index.html#aPropo">À propos de moi</a></li>
+          <li><a href="index.html#experience">Expérience</a></li>
+          <li><a href="index.html#projets">Projets</a></li>
+        </ul>
+
+        <!-- Logo du site sur téléphone-->
+        <a class="nb_logo" href="index.html"><strong>NB</strong></a>
+      </div>
+      <div class="menuDroit">
+        <!-- Section du menu avec le bouton pour l'ouvrir et le fermer -->
+        <div class="menu">
+          <img src="menuh.png" alt="Menu" id="menuButton" class="menu-button default">
+          <img src="x.png" alt="Fermer" id="closeButton" style="display:none;">
+        </div>
+        <!-- Bouton pour envoyer un courriel -->
+        <a href="mailto:nbake013@uottawa.ca"><button class="buttomContact">
+          <span>Contactez moi</span><div class="icon"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg>
+        </button></a>
+      </div>
+    </nav>
+    
+    <!-- Menu déroulant caché par défaut -->
+    <div class="slide-menu" id="slideMenu">
+        <!-- Contenu du menu avec des liens vers différentes sections de la page -->
+        <ul>
+          <li><a href="index.html#aPropo">À propos de moi</a></li>
+          <li><a href="index.html#experience">Expérience</a></li>
+          <li><a href="index.html#projets">Projets</a></li>
+          <li><a href="mailto:nbake013@uottawa.ca">Contactez moi</a></li>
+        </ul>
+    </div>
+
+    <div class="about">
+      <h2>à venir </h2>
+    </div>
+
+  </div>
+
+  <script>
+
+    // Ajoute un effet de défilement en douceur lorsqu'un lien du menu est cliqué
+    document.querySelectorAll('.slide-menu a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault(); 
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          const targetPosition = targetElement.getBoundingClientRect().top;
+
+          window.scrollBy({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Références aux boutons du menu et au menu coulissant
+    const menuButton = document.getElementById('menuButton');
+    const closeButton = document.getElementById('closeButton');
+    const slideMenu = document.getElementById('slideMenu');
+
+    // Affiche le menu coulissant lorsqu'on clique sur le bouton du menu
+    menuButton.addEventListener('click', function() {
+      slideMenu.classList.add('show-menu'); 
+      menuButton.style.display = 'none'; 
+      closeButton.style.display = 'inline';
+    });
+
+    // Cache le menu coulissant lorsqu'on clique sur le bouton de fermeture
+    closeButton.addEventListener('click', function() {
+      slideMenu.classList.remove('show-menu'); 
+      closeButton.style.display = 'none';
+      menuButton.style.display = 'inline';
+    });
+
+
+  </script>
+
+</body>
+</html>
