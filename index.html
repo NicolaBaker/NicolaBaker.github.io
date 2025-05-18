@@ -16,6 +16,9 @@
       overflow-x: hidden;
       font-family: 'Wix Madefor Text', Arial, sans-serif;
     }
+    body ::selection {
+      background-color: #c0b19e;
+    }
    
     /*Menu ordi*/
     .menubar {
@@ -46,8 +49,8 @@
     }
     .menubar .navMenu ul li a {
       text-decoration: none; 
-      color: #1a1a1a;          
-      font-size: 1.6em;     
+      color: #1a1a1a;
+      font-size: 1.6em;
       transition: color 0.3s ease;
     }
     .menubar .navMenu ul li a:hover {
@@ -589,7 +592,7 @@
       /*Ajuste le curseur pour mon nom*/
       @keyframes typing {
         from { width: 0; }
-        to { width: 40%; }
+        to { width: 30%; }
       }
 
       /*Ajuste la hauteur de la 3e section experience*/
@@ -689,7 +692,13 @@
     @media screen and (max-width: 660px) {
       /*Ajuste mon image*/
       .NicolaImg {
+        height: 250px;
+        width: 250px;
         border-radius: 40px;
+      }
+
+      h2{
+        font-size: 1.5em;
       }
 
       /*Ajuste le curseur pour mon nom*/
@@ -703,7 +712,8 @@
         width: 32px; 
         height: 32px; 
         transition: background-image 0.3s ease; 
-        background-size: cover; 
+        background-size: cover;
+        margin-right: 10px;
       }
 
       /*Ajuste la 4e section projets*/
