@@ -16,7 +16,10 @@
       overflow-x: hidden;
       font-family: 'Wix Madefor Text', Arial, sans-serif;
     }
-   
+    body ::selection {
+      background-color: #c0b19e;
+    }
+
     /*Menu ordi*/
     .menubar {
       position: fixed;
@@ -348,16 +351,19 @@
     @media screen and (max-width: 660px) {
 
       /*Menu pour téléphone*/
+      .menu{
+        margin-left: 85%;
+      }
       .menu-button {
-        width: 32px; 
-        height: 32px; 
-        transition: background-image 0.3s ease;
+        width: 37px; 
+        height: 37px; 
+        transition: background-image 0.3s ease; 
         background-size: cover;
       }
 
       /*Ajuste ma section about*/
       .about{
-        margin-top: 12.5%;
+        margin-top: 16.5%;
         height: 65vh;
         top: 1050px;
         width: 89%;

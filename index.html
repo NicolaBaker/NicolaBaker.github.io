@@ -19,7 +19,6 @@
     body ::selection {
       background-color: #c0b19e;
     }
-   
     /*Menu ordi*/
     .menubar {
       position: fixed;
@@ -550,6 +549,7 @@
     }
     .footer-links li a:hover .arrow-icon {
       transform: translateX(8px);
+      transition: transform 0.3s ease;
     }
     .footer-bottom {
       font-size: 14px;
@@ -603,8 +603,8 @@
       }
     }
 
-    /* Styles responsives MAX 1000px*/
-    @media screen and (max-width: 1000px) {
+    /* Styles responsives MAX 1100px*/
+    @media screen and (max-width: 1100px) {
 
       /*Ajuste le curseur pour mon nom*/
       @keyframes typing {
@@ -716,9 +716,9 @@
         margin-left: 85%;
       }
       .menu-button {
-        width: 37px; 
-        height: 37px; 
-        transition: background-image 0.3s ease; 
+        width: 37px;
+        height: 37px;
+        transition: background-image 0.3s ease;
         background-size: cover;
       }
 
@@ -787,7 +787,7 @@
         font-size: 0.9em;
       }
       .card p {
-        font-size: 0.5em;
+        font-size: 0.4em;
       }
       .card-container {
         grid-template-columns: repeat(2, 1fr);
@@ -839,6 +839,7 @@
           <li><a href="#aPropo">À propos de moi</a></li>
           <li><a href="#experience">Expérience</a></li>
           <li><a href="#projets">Projets</a></li>
+          <li><a href="indexEN.html">EN</a></li>
         </ul>
 
         <!-- Logo du site sur téléphone-->
@@ -865,11 +866,12 @@
           <li><a href="index.html#experience">Expérience</a></li>
           <li><a href="index.html#projets">Projets</a></li>
           <li><a href="mailto:nbake013@uottawa.ca">Contactez moi</a></li>
+          <li><a href="indexEN.html">EN</a></li>
         </ul>
     </div>
 
     <!-- Section avec ma photo et mon nom -->
-    <div class="about">    
+    <div class="about">
       <div class="moi-section"><img class="NicolaImg" src="NicolaBourse.jpg" alt="Nicola"></div>
       <h2>Nicola Baker</h2>
     </div>

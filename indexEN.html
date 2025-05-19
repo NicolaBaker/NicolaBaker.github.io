@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nicola Baker</title>
+  <link rel="icon" type="image/x-icon" href="NB_nicola.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Wix Madefor Text', Arial, sans-serif;
+    }
+    body ::selection {
+      background-color: #c0b19e;
+    }
+    /*Menu ordi*/
+    .menubar {
+      position: fixed;
+      top: 0px;
+      left: 0;
+      width: 100%;
+      height: 12%;
+      background-color: #ffffff;
+      transition: top 0.3s ease-in-out;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+    .menubar h3 {
+      font-size: 5em;
+      font-weight: bold;
+      flex: 1;
+    }
+    .menubar .navMenu ul{
+      display: flex; 
+      list-style-type: none;
+    }
+    .menubar .navMenu ul li{
+      margin: 0 32px;
+      font-family: sans-serif;
+      color: #1a1a1a; 
+    }
+    .menubar .navMenu ul li a {
+      text-decoration: none; 
+      color: #1a1a1a;
+      font-size: 1.6em;
+      transition: color 0.3s ease;
+    }
+    .menubar .navMenu ul li a:hover {
+      color: #c0b19e;
+    }
+    .menuDroit{
+      flex: 1;
+    }
+    .menuDroit a{
+      outline: none;
+      text-decoration: none;
+    }
+    /*Buttom dans le menu ordi*/
+    .buttomContact {
+      display: flex;
+      text-decoration: none;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      background-color: #1a1a1a;
+      color: #eeeeee;
+      border: 2px solid #1a1a1a;
+      border-radius: 50px;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      width: 200px;
+      height: 55px;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: 75px;
+      overflow: hidden;
+      transition: color 0.5s cubic-bezier(0.19, 1, 0.22, 1), background-color 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .buttomContact span {
+      display: inline-block;
+      transform: translateX(0);
+      transition: transform 0.5s ease-out;
+    }
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%) translateX(0);
+      opacity: 0;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .buttomContact:hover span {
+      transform: translateX(-8px);
+    }
+    .buttomContact:hover .icon {
+      opacity: 1;
+      transform: translateY(-50%) translateX(4px);
+    }
+    .icon svg {
+      width: 12px;
+      fill: currentColor;
+    }
+    .nb_logo{
+      display: none;
+    }
+    /* Menu coulissant */
+    .menu {
+      display: none;
+      position: relative;
+      z-index: 999;
+      margin-left: 91%;
+    }
+    .menu-button {
+      margin-top: 2px;
+      width: 42px; 
+      height: 42px; 
+      transition: background-image 0.3s ease; 
+      background-size: cover; 
+    }
+    #closeButton {
+      position: fixed;
+      right: 220px;
+      top: 15px;
+      display: none; 
+      width: 32px;
+    }
+    .slide-menu {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 200px;
+      height: 100%;
+      background-color: #1a1a1a;
+      border-left: 1px solid rgb(255, 255, 255);
+      box-shadow: -5px 0 10px rgba(15, 15, 15, 0.2);
+      z-index: 9999;
+      transform: skewX(-20deg);
+      transition: transform 0.4s ease, right 0.4s ease;
+    }
+    .slide-menu ul {
+      list-style: none;
+      padding: 20px;
+      margin: 0;
+    }
+    .slide-menu ul li {
+      margin: 20px 0;
+    }
+    .slide-menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+    .slide-menu ul li a:hover {
+      color: #c0b19e;
+    }
+    .show-menu {
+      right: 0;
+      transform: skewX(0deg);
+    }
+
+    /*Compteur de 0 a 100*/
+    .corps {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 0%;
+      background-color: #1a1a1a;
+      z-index: 1;
+      transition: width 0.05s linear;
+    }
+    .counter {
+      position: absolute;
+      top: 50%; left: 2%;
+      transform: translateY(-50%);
+      font-size: 32vw;
+      font-weight: bold;
+      color: white;
+      z-index: 2;
+    }
+
+    /*La page*/
+    .main-content {
+      display: none;
+      width: 100%;
+      height: 4900px; 
+      background-color: white;
+      color: #1a1a1a;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    /*La 1er section avec mon nom*/
+    .about {
+      background-color: #f6f4f1;
+      border-radius: 10px;
+      width: 97vw;
+      margin-top: 6%;
+      height: 91vh;
+      opacity: 0;
+      font-size: 2rem;
+      transition: opacity 1s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 10;
+    }
+    .about.visible {
+      opacity: 1;
+    }
+    .moi-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 3;
+      padding: 20px;
+    }
+    .NicolaImg {
+      width: 550px;
+      height: 550px;
+      border-radius: 20px;
+      object-fit: cover;
+      z-index: 3; 
+    }
+    h2 {
+      margin-top: 5px;
+      color: #1a1a1a;
+      font-size: 2.0em;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: .13em solid #c0b19e;
+      animation: typing 2s steps(30, end), blink-caret .85s step-end infinite;
+      transition: width 0.5s ease, color 0.3s ease;
+    }
+    /* Animation pour leffet de saisie */
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 20%; }
+    }
+    /* Animation pour leffet de clignotement du curseur */
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #c0b19e; }
+    }
+
+    /*La 2e section sur moi*/
+    h1 {
+      margin-top: -30px;
+      margin-left: 10px;
+      font-size: 11.2vw;
+    }
+    .aPropo p {
+      font-size: 1.8rem;
+      margin-top: -50px;
+      margin-left: 40%;
+      margin-right: 30px;
+    }
+    .aPropo {
+      width: 90vw;
+      margin: 6% auto;
+      padding: 30px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: justify;
+      font-size: 1.8rem;
+    }
+
+    /*La 3e section sur mon experience*/
+    .experience {
+      width: 100%;
+      height: 200vh;
+      margin: 5% auto;
+      display: flex;
+      background-color: #1a1a1a;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: justify;
+      font-size: 1.8rem;
+      color: #1a1a1a;
+      transition: color 0.3s ease;
+    }
+    /* Conteneur pour les cartes dans la section expérience */
+    .card-container {
+      display: grid;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    /* Style pour les cartes avec effet de perspective */
+    .card {
+      perspective: 1000px;
+      position: relative;
+      width: 400px;
+      height: 400px;
+      padding: 10px;
+      overflow: hidden;
+      border-radius: 30px;
+    }
+    /* Intérieur des cartes avec effet de rotation */
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      position: relative;
+      border-radius: 30px;
+    }
+    /* Effet de rotation des cartes au survol */
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+    /* Faces avant et arrière des cartes */
+    .card-front, .card-back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 30px;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .card-front {
+      background-color: #ffffff00;
+      z-index: 2;
+    }
+    .card-back {
+      background-color: #f6f4f1;
+      color: #1a1a1a;
+      transform: rotateY(180deg);
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      object-fit: cover;
+      z-index: 1;
+    }
+    /* Titres de Expérience */
+    h4 {
+      font-size: 2.5em;
+      color: #ffffff;
+    }
+    /* Titres des cartes */
+    .card h3 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      padding: 0;
+      color: #ffffff;
+      font-size: 2.0em;
+      text-align: center;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-back p {
+      margin-top: 10px;
+      font-size: 1.0em;
+      text-align: center;
+      padding: 10px;
+    }
+    /*Grid des cartes*/
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    .carousel-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #f6f4f1;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #f8f8f8;
+      transition: transform 0.3s;
+    }
+    .carousel-item:hover {
+      transform: scale(1.05);
+      border-color: #c0b19e;
+    }
+    .carousel-item img {
+      max-width: 120px;
+      height: auto;
+    }
+
+    /*La 4e section sur mes projets*/
+    .projets {
+      margin: auto;
+      padding: 60px 20px;
+    }
+    .projets h1 {
+      text-align: center;
+      font-size: 11.4vw;
+      margin-bottom: 50px;
+      color: #1a1a1a;
+    }
+    .projets-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .projet {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      width: 360px;
+      height: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .projet:hover {
+      transform: translateY(-5px);
+    }
+    .projet img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .projet h3 {
+      font-size: 1.4em;
+      margin: 10px 0;
+      color: #1a1a1a;
+    }
+    .projet p {
+      font-size: 1em;
+      color: #555;
+      flex-grow: 1;
+    }
+    /*Buttom pour voir plus*/
+    .voir-plus {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-weight: 600;
+      padding: 10px 0px;
+      border-radius: 8px;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .voir-plus:hover {
+      color: #1f2020;
+    }
+    .voir-plus .arrow-icon {
+      width: 18px;
+      height: 18px;
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+      fill: currentColor;
+    }
+    .voir-plus:hover .arrow-icon {
+      transform: translateX(6px);
+    }
+    
+    /*Le footer section*/
+    .footer {
+      background-color: #f6f4f1;
+      padding: 80px 20px;
+      width: 100%;
+      color: #1a1a1a;
+      font-family: "Neue Haas Grotesk", sans-serif;
+    }
+    .footer-container {
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      margin: 10px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+    .footer-text h3 {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .footer-text p {
+      font-size: 20px;
+      line-height: 1.6;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px; 
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+      margin-left: 50px;
+    }
+    .footer-links li {
+      display: flex;
+      align-items: center;
+    }
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: #353535; 
+    }
+    .arrow-icon {
+      width: 19px;
+      height: 19px;
+      margin-left: 10px;
+    }
+    .footer-links li a:hover .arrow-icon {
+      transform: translateX(8px);
+    }
+    .footer-bottom {
+      font-size: 14px;
+      color: #555;
+      margin-top: 30px;
+      margin-left: 10px;
+    }
+
+    /* Styles responsives MIN*/
+    @media (min-width: 1024px) {
+      /*footer*/
+      .footer-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-text {
+        max-width: 50%;
+        margin-left: 10px;
+      }
+      .footer-links {
+        flex: 1;
+        font-size: 1.7em;
+        padding-right: 60px;
+      }
+    }
+
+    /* Styles responsives MAX 1860px*/
+    @media screen and (max-width: 1860px) {
+
+      /*La hauteur du menu*/
+      .menubar {
+        height: 90px;
+      }
+
+      /*Ajuste mon image*/
+      .NicolaImg {
+        width: 390px;
+        height: 390px;
+      }
+
+      /*Ajuste le curseur pour mon nom*/
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 30%; }
+      }
+
+      /*Ajuste la hauteur de la 3e section experience*/
+      .experience{
+        height: 255vh;
+      }
+    }
+
+    /* Styles responsives MAX 1100px*/
+    @media screen and (max-width: 1100px) {
+
+      /*Ajuste le curseur pour mon nom*/
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 60%; }
+      }
+
+      /*Menu pour téléphone*/
+      .menu {
+        display: block;
+      }
+
+      /*La hauteur du menu*/
+      .menubar {
+        height: 60px;
+      }
+
+      /*Éfface le menu pour l'ordi*/
+      .menubar .navMenu ul{
+        display: none;
+      }
+      .menuDroit .buttomContact{
+        display: none;
+      }
+
+      /*Ajoute le nouveau logo*/
+      .nb_logo{
+        display: block;
+        margin-left: 45%;
+        font-family: sans-serif;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-size: 1.7em;
+        transition: color 0.3s ease;
+      }
+      
+      /*Changer la groseur du textes dans A propro*/
+      .aPropo p{
+        font-size: 1.6rem;
+        margin-left: 20%;
+      }
+
+      /*Ajuster les carte dans experience*/
+      .card {
+        perspective: 1000px;
+        position: relative;
+        width: 350px;
+        height: 350px;
+        overflow: hidden;
+      }
+      .card-container {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+      }
+      .card p {
+        font-size: 0.9em;
+      }
+      .card h3 {
+        font-size: 1.4em;
+      }
+
+      /*Ajuste ma section about*/
+      .about{
+        margin-top: 7.5%;
+        width: 85%;
+        height: 85vh;
+      }
+      
+      /*Ajuste la 4e section projets*/
+      .projet {
+        position: relative;
+        width: 250px;
+        height: 350px;
+      }
+      .projet h3 {
+        font-size: 1.2em;
+        margin: 10px 0;
+        color: #222;
+      }
+      .projet p {
+        font-size: 0.8em;
+        color: #555;
+        flex-grow: 1;
+      }
+    }  
+
+    /* Styles responsives MAX 660px*/
+    @media screen and (max-width: 660px) {
+      /*Ajuste mon image*/
+      .NicolaImg {
+        height: 260px;
+        width: 260px;
+        border-radius: 40px;
+        margin-top: 9px;
+      }
+
+      h2{
+        font-size: 1.4em;
+      }
+
+      /*Ajuste le curseur pour mon nom*/
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 90%; }
+      }
+
+      /*Menu pour téléphone*/
+      .menu{
+        margin-left: 85%;
+      }
+      .menu-button {
+        width: 37px;
+        height: 37px;
+        transition: background-image 0.3s ease;
+        background-size: cover;
+      }
+
+      /*Ajuste la 4e section projets*/
+      .aPropo{
+        text-align: left;
+      }
+      .aPropo p{
+        font-size: 1.2rem;
+        margin-top: 10px;
+        margin-left: 2%;
+        margin-right: 9%;
+      }
+      .aPropo h1{
+        font-size: 3.7rem;
+        margin-top: 22px;
+        margin-left: 2%;
+        margin-right: 5%;
+      }
+      .projet {
+        width: 88%;
+        height: 380px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .projet h3 {
+        font-size: 1.2em;
+        margin: 10px 0;
+        color: #222;
+      }
+      .projet p {
+        font-size: 0.8em;
+        color: #555;
+        flex-grow: 1;
+      }
+
+      /*Ajuste ma section about*/
+      .about{
+        margin-top: 16.5%;
+        height: 55vh;
+        top: 1050px;
+        width: 89%;
+      }
+
+      /*Ajuster les carte dans experience*/
+      .experience{
+        height: 165vh;
+      }
+      .experience h4{
+        font-size: 1.6em;
+      }
+      .card {
+        perspective: 1000px;
+        position: relative;
+        width: 170px;
+        height: 170px;
+        overflow: hidden;
+      }
+      .card h3 {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.9em;
+      }
+      .card p {
+        font-size: 0.4em;
+      }
+      .card-container {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+      }
+
+      /*Ajuste ma section footer*/
+      .footer-links {
+        margin-left: 10px;
+        margin-top: -70px;
+        margin-bottom: 20px;
+      }
+      .footer-text {
+        margin-left: 4px;
+      }
+      .footer-text h3 {
+        font-size: 38px;
+        margin-bottom: 16px;
+      }
+      .footer-text p {
+        font-size: 15px;
+        line-height: 1.6;
+
+      }
+    }
+    @media (min-width: 968px) {
+      .counter { 
+        font-size: 22rem; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Le compteur -->
+  <div class="corps">
+    <div class="overlay" id="overlay"></div>
+    <div class="counter" id="counter">000</div>
+  </div>
+
+  <!-- Contenu principal du site -->
+  <div class="main-content" id="main-content">
+
+    <!-- Barre de navigation du haut MENU -->
+    <nav class="menubar" id="menubar">
+      <div class="navMenu">
+        <ul>
+          <li><a href="indexEN.html"><strong>NB</strong></a></li>
+          <li><a href="#aPropo">About me</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projets">Projects</a></li>
+          <li><a href="index.html">FR</a></li>
+        </ul>
+
+        <!-- Logo du site sur téléphone-->
+        <a class="nb_logo" href="indexEN.html"><strong>NB</strong></a>
+      </div>
+      <div class="menuDroit">
+        <!-- Section du menu avec le bouton pour l'ouvrir et le fermer -->
+        <div class="menu">
+          <img src="menuh.png" alt="Menu" id="menuButton" class="menu-button default">
+          <img src="x.png" alt="Fermer" id="closeButton" style="display:none;">
+        </div>
+        <!-- Bouton pour envoyer un courriel -->
+        <a href="mailto:nbake013@uottawa.ca"><button class="buttomContact">
+          <span>Contact me</span><div class="icon"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg>
+        </button></a>
+      </div>
+    </nav>
+    
+    <!-- Menu déroulant caché par défaut -->
+    <div class="slide-menu" id="slideMenu">
+        <!-- Contenu du menu avec des liens vers différentes sections de la page -->
+        <ul>
+          <li><a href="index.html#aPropo">About me</a></li>
+          <li><a href="index.html#experience">Experience</a></li>
+          <li><a href="index.html#projets">Projects</a></li>
+          <li><a href="mailto:nbake013@uottawa.ca">Contact me</a></li>
+          <li><a href="index.html">FR</a></li>
+        </ul>
+    </div>
+
+    <!-- Section avec ma photo et mon nom -->
+    <div class="about">
+      <div class="moi-section"><img class="NicolaImg" src="NicolaBourse.jpg" alt="Nicola"></div>
+      <h2>Nicola Baker</h2>
+    </div>
+
+    <!-- Section À propos -->
+    <div class="aPropo" id="aPropo">
+      <h1>About me</h1>
+      <p>I am currently working part-time in the customer service department at Baker Design, which allows me to gain experience in customer relations.
+        I also work as a web designer. I am responsible for all aspects of the website, including the interface, programming languages, and I also perform result analysis.
+        In my CO-OP journey, my goal is to become a proficient software engineer, innovate in technology, and make a positive contribution to society. <br>______ _
+      </p>
+    </div>
+
+    <!-- Section Expérience -->
+    <div class="experience" id="experience">
+          <h4>Experience</h4><br>
+          <!-- Conteneur pour les cartes d'expérience -->
+          <div class="card-container">
+            <!-- Carte pour l'expérience de programmeur -->
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img src="Web-Developers.jpg" alt="code" />
+                  <h3>Web developer</h3>
+                </div>
+                <div class="card-back">
+                  <p>Use HTML, CSS, and JavaScript to create and maintain a website. Ensure an optimal user experience while guaranteeing browser stability.</p>
+                </div>
+              </div>
+            </div>
+              
+            <!-- Carte pour l'expérience de gestion des réseaux sociaux -->
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img src="reseaux.jpg" alt="design"  />
+                  <h3>Social media</h3>
+                </div>
+                <div class="card-back">
+                  <p>Creating social media posts and writing a blog every two months.</p>
+                </div>
+              </div>
+            </div>
+              
+            <!-- Carte pour l'expérience en UI/UX -->
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img src="ui-ux-design-website.jpg" alt="design"  />
+                  <h3>UI/UX Design</h3>
+                </div>
+                <div class="card-back">
+                  <p>Creating aesthetically pleasing user interfaces while optimizing the navigation experience to meet user needs.<br> (<a href="https://www.baker-design.ca/">www.baker-design.ca</a>)</p>
+                </div>
+              </div>
+            </div>
+              
+            <!-- Carte pour l'expérience de vendeur -->
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img src="vendeur.jpg" alt="Vendeur" />
+                  <h3>Salesperson</h3>
+                </div>
+                <div class="card-back">
+                  <p>Create and present quotes to clients. Serve clients and respond to their inquiries. Update prices on new or existing items.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Carte pour l'expérience de livreur -->
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img src="delivery.jpg" alt="delivery" />
+                  <h3>Delivery person</h3>
+                </div>
+                <div class="card-back">
+                  <p>Drive various vehicles to deliver goods. Receive orders and place them in the appropriate warehouse.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Carte pour l'expérience d'installateur -->
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img src="installer.jpg" alt="installer" />
+                  <h3>Installer</h3>
+                </div>
+                <div class="card-back">
+                  <p>Install various materials using a variety of tools.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Carte pour l'expérience de commis -->
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img src="nofrill.jpg" alt="nofrills" />
+                  <h3>Clerk</h3>
+                </div>
+                <div class="card-back">
+                  <p>Process orders and create barcodes for each product. Place the items on the shelves.</p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Projets -->
+    <div class="projets" id="projets">
+      <h1>My Projects</h1>
+      <br>
+      <div class="projets-container">
+        
+        <!-- Projet 1 -->
+        <div class="projet">
+          <img src="site-web-dentiste.jpg" alt="Devoir1">
+          <h3>Design 1: Dentist Website</h3>
+          <p>Creating a website for a dentist with HTML/CSS/JavaScript and using Bootstrap.</p>
+          <a href="siteWebdedentiste.html" class="voir-plus">See More<svg class="arrow-icon" viewBox="0 0 14 14"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg></a>
+        </div>
+        
+        <!-- Projet 2 -->
+        <div class="projet">
+          <img src="devoir2.jpg" alt="Devoir">
+          <h3>Design 2 : A little game</h3>
+          <p>I created this card game using HTML, CSS, and JavaScript.</p>
+          <a href="unpetitjeu.html" class="voir-plus">See More<svg class="arrow-icon" viewBox="0 0 14 14"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg></a>
+        </div>
+        
+        <!-- Projet 3 -->
+        <div class="projet">
+          <img src="ecommerce.jpg" alt="Devoir">
+          <h3>Design 3 : An e-commerce site</h3>
+          <p>I created this e-commerce site using React.js.</p>
+          <a href="ecommerce.html" class="voir-plus">See More<svg class="arrow-icon" viewBox="0 0 14 14"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg></a>
+        </div>
+
+        <!-- Projet 4 -->
+        <div class="projet">
+          <img src="devoir4.jpg" alt="Devoir">
+          <h3>Design 4 : An analysis site</h3>
+          <p>I developed this sports website using React.js.</p>
+          <a href="unsitedanalyse.html" class="voir-plus">See More<svg class="arrow-icon" viewBox="0 0 14 14"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg></a>
+        </div>
+
+      </div>
+    </div>
+
+      <!-- Pied de page avec mes infos et liens utiles -->
+      <footer class="footer" id="footer">
+        <div class="footer-container">
+          <div class="footer-text">
+            <h3>Let's keep in touch.</h3>
+            <p>Thank you for your visit. This site is designed to share my projects, my ideas, and my journey.</p>
+          </div>
+          <ul class="footer-links">
+            <li><a href="mailto:nbake013@uottawa.ca">
+              <span>E-mail</span>
+              <svg class="arrow-icon" viewBox="0 0 14 14"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg>
+            </a></li>
+            <li><a href="https://github.com/NicolaBaker">
+              <span>Github</span>
+              <svg class="arrow-icon" viewBox="0 0 14 14"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg>
+            </a></li>
+            <li><a href="https://www.linkedin.com/in/nicola-baker-91874b291/">
+              <span>LinkedIn</span>
+              <svg class="arrow-icon" viewBox="0 0 14 14"><path d="M7 0L5.59 1.41L10.17 6H0V8H10.17L5.58 12.59L7 14L14 7L7 0Z"/></svg>
+            </a></li>
+          </ul>
+        </div>
+        <div class="footer-bottom">
+          &copy; 2025 NicolaBaker | All rights reserved
+        </div>
+      </footer>
+
+  </div>
+
+  <script>
+
+    // Vérifie si le compteur a déjà été vu
+    if (!localStorage.getItem("compteurVu")) {
+
+      // Si c’est la premiere fois, on affiche le compteur et on cache
+      document.querySelector(".corps").style.display = "block";
+      document.querySelector(".main-content").style.display = "none";
+      let overlay = document.querySelector('.overlay');
+      let counter = document.querySelector('.counter');
+      let count = 0;
+
+      // Affichage du nombre avec des zéros devant
+      let interval = setInterval(() => {
+        if (count <= 100) {
+          let displayCounts;
+          if (count < 10) {
+            displayCounts = "00" + count;
+          }
+          else if (count < 100) {
+            displayCounts = "0" + count;
+          }
+          else {
+            displayCounts = "" + count;
+          }
+          counter.textContent = displayCounts;
+          overlay.style.width = count + "%";
+          count++;
+        }
+        else {
+          clearInterval(interval);
+
+          // On cache le compteur et on montre le contenu
+          document.querySelector(".corps").style.display = "none";
+          document.querySelector(".main-content").style.display = "flex";
+          document.querySelector(".about").classList.add("visible");
+          localStorage.setItem("compteurVu", "true");
+        }
+      }, 16);
+    }
+    else {
+      // Si déjà vu, on affiche directement le contenu
+      document.querySelector(".corps").style.display = "none";
+      document.querySelector(".main-content").style.display = "flex";
+      document.querySelector(".about").classList.add("visible");
+    }
+    
+    // Dès que la page est chargée
+    document.addEventListener("DOMContentLoaded", function () {
+      const counter = document.querySelector(".counter");
+      const footer = document.getElementById("footer");
+
+      if (counter && footer) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2) {
+              footer.style.display = "none"; 
+            }
+            else {
+              footer.style.display = "block";
+            }
+          });
+        },{ 
+          threshold: 0.1
+        });
+
+        observer.observe(counter);
+      }
+    });
+
+    // Ajoute un effet de défilement en douceur lorsqu'un lien du menu est cliqué
+    document.querySelectorAll('.slide-menu a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          const targetPosition = targetElement.getBoundingClientRect().top;
+
+          window.scrollBy({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Références aux boutons du menu et au menu coulissant
+    const menuButton = document.getElementById('menuButton');
+    const closeButton = document.getElementById('closeButton');
+    const slideMenu = document.getElementById('slideMenu');
+
+    // Affiche le menu coulissant lorsqu'on clique sur le bouton du menu
+    menuButton.addEventListener('click', function() {
+      slideMenu.classList.add('show-menu'); 
+      menuButton.style.display = 'none'; 
+      closeButton.style.display = 'inline';
+    });
+
+    // Cache le menu coulissant lorsqu'on clique sur le bouton de fermeture
+    closeButton.addEventListener('click', function() {
+      slideMenu.classList.remove('show-menu'); 
+      closeButton.style.display = 'none';
+      menuButton.style.display = 'inline';
+    });
+
+
+  </script>
+
+</body>
+</html>
