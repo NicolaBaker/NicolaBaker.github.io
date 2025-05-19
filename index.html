@@ -720,7 +720,7 @@
         font-size: 1.2rem;
         margin-top: 10px;
         margin-left: 5%;
-        margin-right: 7%;
+        margin-right: 9%;
       }
       .aPropo h1{
         font-size: 3.7rem;
@@ -829,7 +829,7 @@
         </ul>
 
         <!-- Logo du site sur téléphone-->
-         <a class="nb_logo" href="index.html"><strong>NB</strong></a>
+        <a class="nb_logo" href="index.html"><strong>NB</strong></a>
       </div>
       <div class="menuDroit">
         <!-- Section du menu avec le bouton pour l'ouvrir et le fermer -->
@@ -1040,41 +1040,51 @@
 
   <script>
 
-    let count = 0;
-    const overlay = document.getElementById("overlay");
-    const counter = document.getElementById("counter");
-    const corps = document.querySelector(".corps");
-    const main = document.getElementById("main-content");
+    // Vérifie si le compteur a déjà été vu
+    if (!localStorage.getItem("compteurVu")) {
 
-    // Je lance une boucle qui va faire monter le compteur jusqu’à 100
-    const interval = setInterval(() => {
-      if (count >= 100) {
-        clearInterval(interval);
-        counter.textContent = "100";
-        overlay.style.width = "100%";
-        setTimeout(showMain, 360);
-      } else {
-        count++;
-        overlay.style.width = count + "%";
-        let displayCounts = "";
-        if (count < 10) {
-          displayCounts = "00" + count; 
-        } else if (count < 100) {
-          displayCounts = "0" + count; 
-        } else {
-          displayCounts = "" + count;
+      // Si c’est la premiere fois, on affiche le compteur et on cache
+      document.querySelector(".corps").style.display = "block";
+      document.querySelector(".main-content").style.display = "none";
+      let overlay = document.querySelector('.overlay');
+      let counter = document.querySelector('.counter');
+      let count = 0;
+
+      // Affichage du nombre avec des zéros devant
+      let interval = setInterval(() => {
+        if (count <= 100) {
+          let displayCounts;
+          if (count < 10) {
+            displayCounts = "00" + count;
+          }
+          else if (count < 100) {
+            displayCounts = "0" + count;
+          }
+          else {
+            displayCounts = "" + count;
+          }
+          counter.textContent = displayCounts;
+          overlay.style.width = count + "%";
+          count++;
         }
-        counter.textContent = displayCounts;
-      }
-    }, 16);
+        else {
+          clearInterval(interval);
 
-    // Cache l’écran de chargement et affiche le contenu principal
-    function showMain() {
-      corps.style.display = "none";
-      main.style.display = "flex";
+          // On cache le compteur et on montre le contenu
+          document.querySelector(".corps").style.display = "none";
+          document.querySelector(".main-content").style.display = "flex";
+          document.querySelector(".about").classList.add("visible");
+          localStorage.setItem("compteurVu", "true");
+        }
+      }, 16);
+    }
+    else {
+      // Si déjà vu, on affiche directement le contenu
+      document.querySelector(".corps").style.display = "none";
+      document.querySelector(".main-content").style.display = "flex";
       document.querySelector(".about").classList.add("visible");
     }
-     
+    
     // Dès que la page est chargée
     document.addEventListener("DOMContentLoaded", function () {
       const counter = document.querySelector(".counter");
@@ -1085,11 +1095,14 @@
           entries.forEach(entry => {
             if (entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2) {
               footer.style.display = "none"; 
-            } else {
+            }
+            else {
               footer.style.display = "block";
             }
           });
-        }, { threshold: 0.1 });
+        },{ 
+          threshold: 0.1
+        });
 
         observer.observe(counter);
       }
@@ -1098,9 +1111,9 @@
     // Ajoute un effet de défilement en douceur lorsqu'un lien du menu est cliqué
     document.querySelectorAll('.slide-menu a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         
-        const targetId = this.getAttribute('href'); 
+        const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
 
         if (targetElement) {
@@ -1129,8 +1142,8 @@
     // Cache le menu coulissant lorsqu'on clique sur le bouton de fermeture
     closeButton.addEventListener('click', function() {
       slideMenu.classList.remove('show-menu'); 
-      closeButton.style.display = 'none';  
-      menuButton.style.display = 'inline';  
+      closeButton.style.display = 'none';
+      menuButton.style.display = 'inline';
     });
 
 
