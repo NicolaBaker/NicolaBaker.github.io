@@ -153,12 +153,12 @@ h1.name .outline{-webkit-text-stroke:1.5px var(--fg);color:transparent}
 }
 
 /* about */
-.about-grid{display:grid;grid-template-columns:1fr 2fr;gap:60px}
+.about-grid{display:grid;grid-template-columns:1fr 2fr;gap:30px}
 @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:30px}}
 .avatar{display:flex;align-items:center;gap:16px}
 .avatar img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:1px solid var(--accent);padding:4px;background:var(--bg2);transition:transform .6s var(--ease),filter .4s;filter:grayscale(.5)}
 .avatar:hover img{transform:rotate(-6deg) scale(1.08);filter:none}
-.about-text{font-size:clamp(1.5rem,3.4vw,3rem);line-height:1.2;letter-spacing:-.02em;font-weight:500}
+.about-text{font-size:clamp(1.3rem,3vw,2.5rem);line-height:1.2;letter-spacing:-.02em;font-weight:500}
 .about-text .w{opacity:.14;transition:opacity .3s}
 .about-text .w.on{opacity:1}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:70px}
@@ -205,6 +205,17 @@ h1.name .outline{-webkit-text-stroke:1.5px var(--fg);color:transparent}
 .tags span{border:1px solid var(--line);border-radius:40px;padding:4px 12px;font-size:.78rem;color:var(--muted)}
 .proj:nth-child(even){margin-top:80px}
 @media(max-width:860px){.proj:nth-child(even){margin-top:0}}
+/* Filtres des projets */
+.project-filters{display:flex;flex-wrap:wrap;gap:10px;margin:-25px 0 42px}
+.project-filter{display:inline-flex;align-items:center;gap:12px;padding:12px 22px;border:1px solid var(--line);border-radius:50px;background:transparent;color:var(--muted);font:inherit;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.project-filter:hover{border-color:var(--accent);color:var(--fg)}
+.project-filter[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.project-filter .filter-count{font-family:'JetBrains Mono',monospace;font-size:.72rem;opacity:.8}
+.project-filter:focus-visible{outline:2px solid var(--accent2);outline-offset:4px}
+.proj[hidden]{display:none!important}
+.proj-wrap.is-filtered .proj{margin-top:0}
+@media(max-width:560px){.project-filters{gap:8px;margin:-25px 0 28px}.project-filter{padding:10px 14px;font-size:.85rem;gap:8px}}
+
 
 /* footer */
 footer{padding:clamp(90px,12vw,180px) var(--pad) 30px;background:var(--foot-bg);color:var(--foot-fg);border-radius:36px 36px 0 0;transition:background-color .5s,color .5s}
@@ -302,7 +313,18 @@ footer .mono{color:var(--foot-muted)}
       </figure>
     </div>
     <div>
-      <p class="about-text" id="aboutText">Je travaille à temps partiel dans le service clientèle chez Baker Design, où j'acquiers de l'expérience dans les relations avec la clientèle. Je suis aussi web designer : interface, langages de programmation et analyse des résultats, je m'occupe de tout le site. Mon objectif de stage : devenir un ingénieur logiciel compétent, innover en technologie et contribuer positivement à la société.</p>
+      <p class="about-text" id="aboutText">
+        Je suis étudiant en génie logiciel à l’Université d’Ottawa. Depuis mon jeune âge, je suis passionné par le développement web, le design et la programmation. J’aime créer des interfaces modernes, développer avec différents langages de programmation et analyser les performances des sites web.
+
+        <br><br>
+
+        En plus de mes études, je travaille à temps partiel comme développeur web dans une agence de marketing et de développement web, ainsi que dans le service à la clientèle chez Baker Design. Ces expériences me permettent de développer mes compétences en programmation, en design UI/UX, en marketing numérique et en relations avec la clientèle.
+
+        <br><br>
+
+        Curieux et motivé, je cherche toujours à apprendre de nouvelles technologies et à améliorer mes compétences. Mon objectif est de devenir un ingénieur logiciel compétent, d’innover dans le domaine technologique et de contribuer positivement à la société.
+      </p>
+
       <div class="stats">
         <div class="stat rv"><strong data-count="8">0</strong><span class="mono" data-i18n="about.s1">Expériences</span></div>
         <div class="stat rv"> <strong><span data-count="30">0</span><em>+</em></strong> <span class="mono" data-i18n="about.s2">Projets web</span> </div>
@@ -436,12 +458,47 @@ footer .mono{color:var(--foot-muted)}
     </span>
   </h2>
 
-  <div class="proj-wrap">
+  <div class="project-filters rv" role="group" aria-label="Catégories de projets" id="projectFilters">
+    <button type="button" class="project-filter" data-filter="all" aria-pressed="true"><span data-i18n="proj.filter.all">Tous les projets</span><span class="filter-count" aria-hidden="true"></span></button>
+    <button type="button" class="project-filter" data-filter="university" aria-pressed="false"><span data-i18n="proj.filter.university">Projets universitaires</span><span class="filter-count" aria-hidden="true"></span></button>
+    <button type="button" class="project-filter" data-filter="professional" aria-pressed="false"><span data-i18n="proj.filter.professional">Projets professionnels</span><span class="filter-count" aria-hidden="true"></span></button>
+    <button type="button" class="project-filter" data-filter="personal" aria-pressed="false"><span data-i18n="proj.filter.personal">Projets personnels</span><span class="filter-count" aria-hidden="true"></span></button>
+  </div>
+
+  <div class="proj-wrap" id="projectGrid">
+
+     <!-- Projet 05 : Baker Design -->
+    <a href="https://github.com/NicolaBaker/UI-UX_Design"
+       target="_blank" rel="noopener noreferrer"
+       class="proj rv" data-hover data-category="professional">
+
+      <div class="proj-inner">
+        <div class="proj-img">
+          <img src="bakerdesignImg.jpg" alt="Design du site web de Baker Design" loading="lazy" />
+        </div>
+
+        <div class="proj-meta">
+          <div>
+            <span class="mono">Design 05</span>
+            <h3 data-i18n="proj.5.t">Baker Design - Site web de couvre-planchers</h3>
+            <p data-i18n="proj.5.d">
+              Conception UX/UI du site web de Baker Design, avec une attention particulière à l'interface et à l'expérience utilisateur.
+            </p>
+          </div>
+          <span class="proj-go">→</span>
+        </div>
+
+        <div class="tags">
+          <span>UX/UI Design</span>
+          <span>Web Design</span>
+        </div>
+      </div>
+    </a>
 
     <!-- Projet 01 : Salon de coiffure -->
     <a href="https://coupe-express-site-seg-3525.vercel.app/"
        target="_blank" rel="noopener noreferrer"
-       class="proj rv" data-hover>
+       class="proj rv" data-hover data-category="university">
 
       <div class="proj-inner">
         <div class="proj-img">
@@ -471,7 +528,7 @@ footer .mono{color:var(--foot-muted)}
     <!-- Projet 02 : Jeu de mémoire -->
     <a href="https://nicolabaker.github.io/jeu_memoire/"
        target="_blank" rel="noopener noreferrer"
-       class="proj rv" data-hover>
+       class="proj rv" data-hover data-category="university">
 
       <div class="proj-inner">
         <div class="proj-img">
@@ -500,7 +557,7 @@ footer .mono{color:var(--foot-muted)}
     <!-- Projet 03 : E-commerce -->
     <a href="https://nicolabaker.github.io/ecommerce/"
        target="_blank" rel="noopener noreferrer"
-       class="proj rv" data-hover>
+       class="proj rv" data-hover data-category="university">
 
       <div class="proj-inner">
         <div class="proj-img">
@@ -529,7 +586,7 @@ footer .mono{color:var(--foot-muted)}
     <!-- Projet 04 : Tableau de bord -->
     <a href="https://nicolabaker.github.io/tableau_de_bord/"
        target="_blank" rel="noopener noreferrer"
-       class="proj rv" data-hover>
+       class="proj rv" data-hover data-category="university">
 
       <div class="proj-inner">
         <div class="proj-img">
@@ -555,38 +612,11 @@ footer .mono{color:var(--foot-muted)}
       </div>
     </a>
 
-    <!-- Projet 05 : Baker Design -->
-    <a href="https://github.com/NicolaBaker/UI-UX_Design"
-       target="_blank" rel="noopener noreferrer"
-       class="proj rv" data-hover>
-
-      <div class="proj-inner">
-        <div class="proj-img">
-          <img src="bakerdesignImg.jpg" alt="Design du site web de Baker Design" loading="lazy" />
-        </div>
-
-        <div class="proj-meta">
-          <div>
-            <span class="mono">Design 05</span>
-            <h3 data-i18n="proj.5.t">Baker Design - Site web de couvre-planchers</h3>
-            <p data-i18n="proj.5.d">
-              Conception UX/UI du site web de Baker Design, avec une attention particulière à l'interface et à l'expérience utilisateur.
-            </p>
-          </div>
-          <span class="proj-go">→</span>
-        </div>
-
-        <div class="tags">
-          <span>UX/UI Design</span>
-          <span>Web Design</span>
-        </div>
-      </div>
-    </a>
 
     <!-- Projet 06 : Portfolio personnel -->
     <a href="https://github.com/NicolaBaker/NicolaBaker.github.io/tree/main/Version1"
        target="_blank" rel="noopener noreferrer"
-       class="proj rv" data-hover>
+       class="proj rv" data-hover data-category="personal">
 
       <div class="proj-inner">
         <div class="proj-img">
@@ -650,7 +680,7 @@ footer .mono{color:var(--foot-muted)}
     'hero.role': 'Web developer &amp;',
     'hero.scroll': '<i></i> Scroll',
     'about.label': '( 01 ) About',
-    about: "I work part-time in customer service at Baker Design, where I gain experience in client relations. I'm also a web designer: interface, programming languages and results analysis — I handle every aspect of the site. My internship goal: to become a skilled software engineer, innovate in technology and make a positive contribution to society.",
+    about: "I am a Software Engineering student at the University of Ottawa. From a young age, I have been passionate about web development, design, and programming. I enjoy creating modern interfaces, working with different programming languages, and analyzing website performance.<br><br>Alongside my studies, I work part-time as a web developer at a marketing and web development agency, as well as in customer service at Baker Design. These experiences allow me to develop my skills in programming, UI/UX design, digital marketing, and customer relations.<br><br>Curious and motivated, I am always looking to learn new technologies and improve my skills. My goal is to become a skilled software engineer, innovate in the technology field, and make a positive contribution to society.",
     'about.s1': 'Experiences', 'about.s2': 'Web projects', 'about.s3': 'Technologies<em>+</em>',
     'exp.label': '( 02 ) Journey', 'exp.title': 'Experience',
     'exp.1.t': 'Web developer',
@@ -704,7 +734,12 @@ footer .mono{color:var(--foot-muted)}
 
 "proj.6.t": "Personal Portfolio - Version 1",
 "proj.6.d": "Design and development of the first version of my personal portfolio, showcasing my skills, experience and projects.",
+"proj.filter.all": "All projects",
+"proj.filter.university": "University projects",
+"proj.filter.professional": "Professional projects",
+"proj.filter.personal": "Personal projects",
 'foot.cta': 'Let\'s keep<br>in touch <u>↗</u>',
+
     'foot.text': 'Thanks for visiting. This site shares my projects, ideas and journey.',
     'foot.email': 'Email',
     'foot.rights': '© 2026 Nicola Baker - All rights reserved',
@@ -717,7 +752,7 @@ footer .mono{color:var(--foot-muted)}
     menu: 'Menu', close: 'Fermer'
   };
   $$('[data-i18n]').forEach(el => { FR[el.dataset.i18n] = el.innerHTML; });
-  FR.about = $('#aboutText').textContent.trim().replace(/\s+/g, ' ');
+  FR.about = $('#aboutText').innerHTML.trim();
 
   const ROLES = {
     fr: ['designer UI/UX', 'créatif curieux', 'futur ingénieur logiciel'],
@@ -815,9 +850,14 @@ footer .mono{color:var(--foot-muted)}
   const at = $('#aboutText');
   let words = [];
   function setAbout(text) {
-    at.innerHTML = text.split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' ');
-    words = $$('.w', at);
-  }
+  at.innerHTML = text.split(/<br\s*\/?>/i).map(part =>
+    part.trim().split(/\s+/).filter(Boolean)
+      .map(w => `<span class="w">${w}</span>`)
+      .join(' ')
+  ).join('<br>');
+
+  words = $$('.w', at);
+}
 
   /* ---------- Scroll : progression, nav, parallax, mots ---------- */
   const prog = $('#progress'), header = $('#header');
@@ -899,6 +939,10 @@ footer .mono{color:var(--foot-muted)}
   function applyLang(l) {
     lang = l;
     root.lang = l;
+    $('#projectFilters').setAttribute(
+      'aria-label',
+      l === 'fr' ? 'Catégories de projets' : 'Project categories'
+    );
     $$('[data-i18n]').forEach(el => { el.innerHTML = t(el.dataset.i18n); });
     setAbout(t('about'));
     document.title = t('title');
@@ -913,7 +957,54 @@ footer .mono{color:var(--foot-muted)}
   }
   langBtn.addEventListener('click', () => applyLang(lang === 'fr' ? 'en' : 'fr'));
   applyLang(lang);
+  /* ---------- Filtres de projets ---------- */
 
+const projectGrid = $('#projectGrid');
+const projectCards = $$('.proj', projectGrid);
+const projectFilters = $$('.project-filter', $('#projectFilters'));
+
+projectFilters.forEach(button => {
+
+  const category = button.dataset.filter;
+
+  // Nombre de projets par catégorie
+  $('.filter-count', button).textContent = String(
+    projectCards.filter(card =>
+      category === 'all' ||
+      card.dataset.category === category
+    ).length
+  ).padStart(2, '0');
+
+  // Lorsqu'on clique sur un onglet
+  button.addEventListener('click', () => {
+
+    projectFilters.forEach(item => {
+      item.setAttribute('aria-pressed', String(item === button));
+    });
+
+    projectGrid.classList.toggle(
+      'is-filtered',
+      category !== 'all'
+    );
+
+    projectCards.forEach(card => {
+
+      const visible =
+        category === 'all' ||
+        card.dataset.category === category;
+
+      card.hidden = !visible;
+
+      if (visible) {
+        card.classList.add('in');
+        io.unobserve(card);
+      }
+
+    });
+
+  });
+
+});
   const topBtn = document.getElementById('topBtn');
 
   if (topBtn) {
