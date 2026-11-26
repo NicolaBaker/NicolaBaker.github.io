@@ -146,6 +146,13 @@ h1.name .outline{-webkit-text-stroke:1.5px var(--fg);color:transparent}
 .marquee span::after{content:"✦";color:var(--accent);font-size:.6em}
 .marquee span:nth-child(even){-webkit-text-stroke:1px var(--fg);color:transparent}
 @keyframes marq{to{transform:translateX(-50%)}}
+/* Cacher sur les petits écrans d'ordinateur portable */
+@media (min-width: 1025px) and (max-width: 1540px)
+       and (hover: hover) and (pointer: fine) {
+  .location-clock {
+    display: none;
+  }
+}
 @media (max-width: 860px) {
   #hero .scroll {
     display: none;
@@ -215,7 +222,39 @@ h1.name .outline{-webkit-text-stroke:1.5px var(--fg);color:transparent}
 .proj[hidden]{display:none!important}
 .proj-wrap.is-filtered .proj{margin-top:0}
 @media(max-width:560px){.project-filters{gap:8px;margin:-25px 0 28px}.project-filter{padding:10px 14px;font-size:.85rem;gap:8px}}
+/* Filtres de projets sur mobile */
+@media (max-width: 860px) {
 
+  .project-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin: -25px 0 30px;
+    padding: 5px 0 12px;
+  }
+
+  .project-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-filter {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 10px 16px;
+    font-size: .85rem;
+    border-radius: 50px;
+    gap: 8px;
+  }
+
+  .project-filter[aria-pressed="true"] {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+}
 
 /* footer */
 footer{padding:clamp(90px,12vw,180px) var(--pad) 30px;background:var(--foot-bg);color:var(--foot-fg);border-radius:36px 36px 0 0;transition:background-color .5s,color .5s}
@@ -282,7 +321,10 @@ footer .mono{color:var(--foot-muted)}
   <div class="hero-glow"></div>
   <div class="hero-top">
     <div class="badge mono" data-i18n="hero.badge"><i></i>En ligne</div>
-    <!--<div class="mono" style="text-align:right">Ottawa, CA<br><span id="clock">--:--</span></div> -->
+    <div class="mono location-clock" style="text-align:right">
+      Ottawa, CA<br>
+      <span id="clock">--:--</span>
+    </div>
   </div>
   <div class="hero-photo"><img src="NicolaBourse.jpg" alt="Portrait de Nicola Baker" data-parallax="0.12" onerror="this.parentElement.style.display='none'" /></div>
   <h1 class="name">
